@@ -1,0 +1,703 @@
+/* panel.css — user panel page only */
+
+/* =====================================================================
+   User panel
+   ===================================================================== */
+.panel-section {
+  position: relative;
+  isolation: isolate;
+  padding: 48px 0 96px;
+  overflow: hidden;
+}
+
+.panel-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 460px;
+  height: 460px;
+  top: -140px;
+  inset-inline-end: -120px;
+  border-radius: 50%;
+  filter: blur(80px);
+  background: radial-gradient(
+    circle,
+    rgba(59, 157, 182, 0.24),
+    transparent 70%
+  );
+  animation: auroraA 18s ease-in-out infinite alternate;
+}
+
+.panel-section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 420px;
+  height: 420px;
+  bottom: 60px;
+  inset-inline-start: -140px;
+  border-radius: 50%;
+  filter: blur(80px);
+  background: radial-gradient(
+    circle,
+    rgba(217, 178, 111, 0.28),
+    transparent 70%
+  );
+  animation: auroraB 21s ease-in-out infinite alternate;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.panel-side,
+.panel-card {
+  background: var(--card);
+  border: 1px solid rgba(69, 107, 92, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(48, 58, 54, 0.08);
+}
+
+.panel-side {
+  padding: 24px 18px;
+  position: sticky;
+  top: 96px;
+  animation: rise 0.7s var(--soft) both;
+}
+
+.panel-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-family: "Lalezar", "Vazirmatn", sans-serif;
+  font-size: 32px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  box-shadow:
+    0 10px 24px rgba(69, 107, 92, 0.3),
+    0 0 0 6px rgba(217, 178, 111, 0.22);
+  animation: avatarGlow 4.8s ease-in-out infinite;
+}
+
+.panel-profile b {
+  font-size: 17px;
+}
+
+.panel-profile span {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.panel-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panel-nav a,
+.panel-nav button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 15px;
+  text-align: right;
+  cursor: pointer;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    transform 0.5s var(--soft);
+}
+
+.panel-nav a:hover,
+.panel-nav button:hover {
+  background: var(--paper-deep);
+  color: var(--ink);
+  transform: translateX(-3px);
+}
+
+.panel-nav a.active {
+  background: linear-gradient(135deg, var(--accent), #3a8a86);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(69, 107, 92, 0.25);
+}
+
+.panel-nav .logout {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  padding-top: 16px;
+  color: var(--brick);
+}
+
+.panel-nav .logout:hover {
+  background: rgba(184, 107, 107, 0.1);
+  color: var(--brick);
+}
+
+.panel-main {
+  min-width: 0;
+}
+
+.panel-tab {
+  display: none;
+}
+
+.panel-tab.active {
+  display: block;
+  animation: tabIn 0.6s var(--soft) both;
+}
+
+.panel-title {
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 6px;
+}
+
+.panel-sub {
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+.panel-card {
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.panel-card h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--paper), var(--paper-deep));
+  border: 1px solid rgba(69, 107, 92, 0.14);
+  transition:
+    transform 0.5s var(--soft),
+    box-shadow 0.5s ease;
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(48, 58, 54, 0.1);
+}
+
+.stat b {
+  display: block;
+  font-family: "Lalezar", "Vazirmatn", sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.3;
+  color: var(--accent-deep);
+}
+
+.stat span {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.suggest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.suggest:first-of-type {
+  border-top: 0;
+}
+
+.suggest-info b {
+  display: block;
+  font-size: 15px;
+}
+
+.suggest-info span {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.suggest .btn {
+  padding: 9px 18px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.my-course {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  margin-bottom: 14px;
+  border: 1px solid rgba(69, 107, 92, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 10px 26px rgba(48, 58, 54, 0.06);
+  transition:
+    transform 0.5s var(--soft),
+    box-shadow 0.5s ease;
+  animation: itemIn 0.6s var(--soft) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.my-course:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(48, 58, 54, 0.12);
+}
+
+.my-course-body {
+  padding: 20px 24px;
+}
+
+.my-course h3 {
+  font-size: 20px;
+  margin: 6px 0 8px;
+}
+
+.my-course p {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.badge-ok {
+  background: rgba(122, 158, 142, 0.2);
+  color: var(--accent-deep);
+}
+
+.order {
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(69, 107, 92, 0.14);
+  border-radius: 18px;
+  background: var(--card);
+  animation: itemIn 0.6s var(--soft) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.order-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.order-head b {
+  color: var(--ink);
+  font-size: 15.5px;
+}
+
+.order-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 5px 0;
+  font-size: 14.5px;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 44px 20px;
+  border: 1.5px dashed rgba(69, 107, 92, 0.25);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.empty-state p {
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.panel-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+}
+
+.panel-form .full {
+  grid-column: 1 / -1;
+}
+
+.panel-form .btn {
+  justify-self: start;
+  margin-top: 0;
+}
+
+.panel-form input[readonly] {
+  background: var(--paper);
+  color: var(--ink-soft);
+}
+
+.panel-form .field input {
+  border-radius: 10px;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.panel-form .field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(217, 178, 111, 0.26);
+}
+
+.msg {
+  display: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.msg.visible {
+  display: block;
+  animation: popIn 0.6s var(--soft) both;
+}
+
+.msg.ok {
+  color: var(--accent);
+}
+
+.msg.err {
+  color: var(--brick);
+}
+
+@media (max-width: 880px) {
+  .panel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-side {
+    position: static;
+  }
+
+  .panel-profile {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+    text-align: right;
+    padding-bottom: 14px;
+  }
+
+  .panel-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 26px;
+    margin: 0;
+  }
+
+  .panel-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .panel-nav a,
+  .panel-nav button {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .panel-nav .logout {
+    margin-top: 0;
+    border-top: 0;
+    border-radius: 12px;
+    padding-top: 10px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .suggest {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-tab.active,
+  .panel-side,
+  .my-course,
+  .order,
+  .panel-avatar,
+  .panel-section::before,
+  .panel-section::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@keyframes avatarGlow {
+  50% {
+    box-shadow:
+      0 10px 24px rgba(69, 107, 92, 0.3),
+      0 0 0 11px rgba(217, 178, 111, 0.06);
+  }
+}
+
+@keyframes tabIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* keyframes also needed on pages that don't load register.css */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+/* =====================================================================
+   Responsive — compact panel (tablets ≤ 880px, phones ≤ 560px)
+   ===================================================================== */
+@media (max-width: 880px) {
+  .panel-section {
+    padding: 24px 0 56px;
+  }
+
+  .panel-grid {
+    gap: 16px;
+  }
+
+  .panel-side {
+    padding: 16px 14px;
+  }
+
+  .panel-card {
+    padding: 18px 16px;
+    margin-bottom: 14px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .stat {
+    padding: 12px 10px;
+    border-radius: 14px;
+  }
+
+  .stat b {
+    font-size: 26px;
+  }
+
+  .stat span {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 560px) {
+  .panel-title {
+    font-size: 22px;
+  }
+
+  .panel-sub {
+    margin-bottom: 14px;
+  }
+
+  /* menu: four items in one row, logout below */
+  .panel-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .panel-nav a,
+  .panel-nav button {
+    padding: 9px 8px;
+    font-size: 13.5px;
+  }
+
+  .suggest {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 0;
+  }
+
+  .suggest .btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .my-course,
+  .order {
+    padding: 14px;
+  }
+}
+
+/* =====================================================================
+   Responsive v2 — shorter menu, paired fields, safe stat numbers
+   ===================================================================== */
+@media (max-width: 880px) {
+  .panel-form {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px 10px;
+  }
+
+  .panel-form .field label {
+    font-size: 12.5px;
+    margin-bottom: 5px;
+  }
+
+  .panel-form .field input {
+    padding: 10px 12px;
+    font-size: 14.5px;
+  }
+
+  .panel-form .btn {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+  }
+
+  .stat b {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .panel-side {
+    padding: 12px;
+  }
+
+  .panel-profile {
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .panel-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+    box-shadow: 0 0 0 4px rgba(217, 178, 111, 0.22);
+  }
+
+  .panel-profile b {
+    font-size: 15px;
+  }
+
+  .panel-profile span {
+    font-size: 12.5px;
+  }
+
+  /* all five entries in one compact row: icon over label */
+  .panel-nav {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .panel-nav a,
+  .panel-nav button {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 2px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .panel-nav a:hover,
+  .panel-nav button:hover {
+    transform: none;
+  }
+
+  .panel-nav svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .panel-nav .logout {
+    grid-column: auto;
+    padding: 8px 2px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr 1.8fr;
+    gap: 8px;
+  }
+
+  .stat b {
+    font-size: 20px;
+  }
+
+  .stat span {
+    font-size: 11px;
+  }
+
+  .panel-card {
+    padding: 14px 12px;
+  }
+
+  .panel-card h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+}
