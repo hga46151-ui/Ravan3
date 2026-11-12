@@ -701,3 +701,155 @@
     margin-bottom: 10px;
   }
 }
+
+/* =====================================================================
+   Logout confirmation dialog — "No" is the emphasised choice
+   ===================================================================== */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(48, 58, 54, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s linear 0.3s;
+}
+
+.confirm-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+body.confirm-open {
+  overflow: hidden;
+}
+
+.confirm-card {
+  width: min(100%, 400px);
+  padding: 28px 24px 22px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid rgba(69, 107, 92, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(48, 58, 54, 0.3);
+  transform: translateY(18px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.confirm-overlay.show .confirm-card {
+  transform: none;
+}
+
+.confirm-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--accent);
+  background: rgba(69, 107, 92, 0.1);
+}
+
+.confirm-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.confirm-card h3 {
+  font-size: 19px;
+  line-height: 1.7;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.confirm-card p {
+  font-size: 14px;
+  line-height: 1.95;
+  color: var(--ink-soft);
+}
+
+.confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 22px;
+}
+
+/* "No": the loud one — big, bold, red frame */
+.confirm-no {
+  width: 100%;
+  padding: 14px 18px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brick);
+  background: rgba(184, 107, 107, 0.08);
+  border: 2px solid var(--brick);
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.confirm-no:hover,
+.confirm-no:focus-visible {
+  color: #fff;
+  background: var(--brick);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(184, 107, 107, 0.34);
+  outline: none;
+}
+
+/* "Yes": quiet at rest, but a soft frame appears around it on hover */
+.confirm-yes {
+  width: 100%;
+  padding: 11px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.confirm-yes:hover,
+.confirm-yes:focus-visible {
+  color: var(--ink);
+  background: rgba(69, 107, 92, 0.06);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.confirm-yes:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirm-overlay,
+  .confirm-card,
+  .confirm-no,
+  .confirm-yes {
+    transition: none;
+  }
+}

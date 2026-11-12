@@ -1336,6 +1336,7 @@
     line-height: 1.7;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -1381,6 +1382,7 @@
     line-height: 1.75;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -1641,6 +1643,7 @@
   .about.is-collapsed .about-body p:first-of-type {
     display: -webkit-box;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -1696,6 +1699,7 @@
     font-size: 12.5px;
     line-height: 1.65;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   /* courses: one swipeable row (the next card peeks in) */
@@ -1731,6 +1735,7 @@
 
   .course-main p {
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .snap-dots {

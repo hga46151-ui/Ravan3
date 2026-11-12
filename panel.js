@@ -84,7 +84,11 @@
     box.textContent = "";
     if (!owned.length) {
       box.appendChild(
-        emptyState("هنوز در دوره‌ای ثبت‌نام نکرده‌اید.", "مشاهده‌ی دوره‌ها", "index.html#courses"),
+        emptyState(
+          "هنوز در دوره‌ای ثبت‌نام نکرده‌اید.",
+          "مشاهده‌ی دوره‌ها",
+          "index.html#courses",
+        ),
       );
       return;
     }
@@ -119,7 +123,13 @@
     var box = $("myOrders");
     box.textContent = "";
     if (!orders.length) {
-      box.appendChild(emptyState("هنوز سفارشی ثبت نکرده‌اید.", "مشاهده‌ی دوره‌ها", "index.html#courses"));
+      box.appendChild(
+        emptyState(
+          "هنوز سفارشی ثبت نکرده‌اید.",
+          "مشاهده‌ی دوره‌ها",
+          "index.html#courses",
+        ),
+      );
       return;
     }
     orders.forEach(function (o, i) {
@@ -166,7 +176,10 @@
 
   $("profileForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    var r = S.auth.update({ name: $("pfName").value, email: $("pfEmail").value });
+    var r = S.auth.update({
+      name: $("pfName").value,
+      email: $("pfEmail").value,
+    });
     if (r.ok) {
       setMsg($("profileMsg"), "تغییرات ذخیره شد.", "ok");
       render();
@@ -188,10 +201,78 @@
     });
   });
 
-  $("logoutBtn").addEventListener("click", function () {
-    S.auth.logout();
-    window.location.href = "index.html";
-  });
+  /* ---------- Logout confirmation dialog ---------- */
+  var logoutDlg = null;
+  var logoutLastFocus = null;
+
+  function buildLogoutDlg() {
+    if (logoutDlg) return logoutDlg;
+    var o = document.createElement("div");
+    o.className = "confirm-overlay";
+    o.setAttribute("role", "alertdialog");
+    o.setAttribute("aria-modal", "true");
+    o.setAttribute("aria-labelledby", "confirmTitle");
+    o.setAttribute("aria-describedby", "confirmText");
+    o.innerHTML =
+      '<div class="confirm-card">' +
+      '<div class="confirm-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>' +
+      '<path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg></div>' +
+      '<h3 id="confirmTitle">از حساب کاربری خارج می‌شوید؟</h3>' +
+      '<p id="confirmText">مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟ برای ورود دوباره به شماره‌ی موبایل و رمز عبورتان نیاز دارید.</p>' +
+      '<div class="confirm-actions">' +
+      '<button type="button" class="confirm-no">خیر، می‌مانم</button>' +
+      '<button type="button" class="confirm-yes">بله، خارج می‌شوم</button>' +
+      "</div></div>";
+    document.body.appendChild(o);
+    o.querySelector(".confirm-no").addEventListener("click", closeLogoutDlg);
+    o.querySelector(".confirm-yes").addEventListener("click", function () {
+      S.auth.logout();
+      window.location.href = "index.html";
+    });
+    o.addEventListener("click", function (e) {
+      if (e.target === o) closeLogoutDlg();
+    });
+    o.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeLogoutDlg();
+      } else if (e.key === "Tab") {
+        var btns = o.querySelectorAll("button");
+        var first = btns[0];
+        var last = btns[btns.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+    logoutDlg = o;
+    return o;
+  }
+
+  function openLogoutDlg() {
+    var o = buildLogoutDlg();
+    logoutLastFocus = document.activeElement;
+    o.classList.add("show");
+    document.body.classList.add("confirm-open");
+    /* the safe choice ("no") gets the focus */
+    setTimeout(function () {
+      o.querySelector(".confirm-no").focus();
+    }, 50);
+  }
+
+  function closeLogoutDlg() {
+    if (!logoutDlg) return;
+    logoutDlg.classList.remove("show");
+    document.body.classList.remove("confirm-open");
+    if (logoutLastFocus && logoutLastFocus.focus) logoutLastFocus.focus();
+  }
+
+  $("logoutBtn").addEventListener("click", openLogoutDlg);
 
   window.addEventListener("hashchange", showTab);
   window.addEventListener("shop:change", function () {

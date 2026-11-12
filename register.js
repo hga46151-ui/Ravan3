@@ -12,6 +12,94 @@
     window.location.href = nextUrl();
   }
   var hasShop = typeof window.Shop !== "undefined";
+
+  /* ---------- Status dialog: "creating account…" → "success" (5 s) ---------- */
+  var STATUS_MIN_LOADING = 1600; /* ms the "please wait" box stays visible */
+  var STATUS_SUCCESS_MS = 5000; /* ms the success box stays before redirect */
+  var statusOverlay = null;
+  var statusTimer = null;
+  var statusLastFocus = null;
+
+  function buildStatus() {
+    if (statusOverlay) return statusOverlay;
+    var o = document.createElement("div");
+    o.className = "status-overlay";
+    o.setAttribute("role", "alertdialog");
+    o.setAttribute("aria-modal", "true");
+    o.setAttribute("aria-live", "assertive");
+    o.innerHTML =
+      '<div class="status-card is-loading">' +
+      '<div class="status-icon" aria-hidden="true">' +
+      '<span class="status-spinner"></span>' +
+      '<svg class="status-check" viewBox="0 0 52 52">' +
+      '<circle class="status-check-ring" cx="26" cy="26" r="23"></circle>' +
+      '<path class="status-check-tick" d="M15 27.5l7.5 7.5L37.5 19"></path>' +
+      "</svg></div>" +
+      '<h3 class="status-title"></h3>' +
+      '<p class="status-text"></p>' +
+      '<div class="status-bar" aria-hidden="true"><i></i></div>' +
+      '<button type="button" class="btn btn-primary status-go">ادامه</button>' +
+      "</div>";
+    document.body.appendChild(o);
+    o.querySelector(".status-go").addEventListener("click", function () {
+      clearTimeout(statusTimer);
+      goNext();
+    });
+    statusOverlay = o;
+    return o;
+  }
+
+  function showStatus(state, title, text) {
+    var o = buildStatus();
+    var card = o.querySelector(".status-card");
+    card.classList.toggle("is-loading", state === "loading");
+    card.classList.toggle("is-success", state === "success");
+    o.querySelector(".status-title").textContent = title;
+    o.querySelector(".status-text").textContent = text;
+    if (state === "success") {
+      var bar = o.querySelector(".status-bar i");
+      bar.style.animation = "none";
+      void bar.offsetWidth; /* restart the countdown bar */
+      bar.style.animation =
+        "statusBar " + STATUS_SUCCESS_MS + "ms linear forwards";
+    }
+    if (!o.classList.contains("show")) {
+      statusLastFocus = document.activeElement;
+      o.classList.add("show");
+      document.body.classList.add("status-open");
+    }
+    if (state === "success") {
+      var go = o.querySelector(".status-go");
+      if (go && go.focus) go.focus();
+    }
+  }
+
+  function hideStatus() {
+    if (!statusOverlay) return;
+    statusOverlay.classList.remove("show");
+    document.body.classList.remove("status-open");
+    if (statusLastFocus && statusLastFocus.focus) statusLastFocus.focus();
+  }
+
+  /* run an auth request behind the dialog; cfg = {loadTitle, loadText, okTitle(user), okText, onFail} */
+  function runWithStatus(request, cfg) {
+    var t0 = Date.now();
+    showStatus("loading", cfg.loadTitle, cfg.loadText);
+    request.then(function (res) {
+      var wait = Math.max(0, STATUS_MIN_LOADING - (Date.now() - t0));
+      setTimeout(function () {
+        if (res && res.ok) {
+          var u = window.Shop.auth.user();
+          var name = u && u.name ? u.name : "";
+          showStatus("success", cfg.okTitle(name), cfg.okText(name));
+          statusTimer = setTimeout(goNext, STATUS_SUCCESS_MS);
+        } else {
+          hideStatus();
+          cfg.onFail(res);
+        }
+      }, wait);
+    });
+  }
   /* Already signed in? Go straight to the panel. */
   if (hasShop && window.Shop.auth.user()) {
     goNext();
@@ -182,23 +270,33 @@
       }
       const btn = registerForm.querySelector('button[type="submit"]');
       btn.disabled = true;
-      window.Shop.auth
-        .register({
+      runWithStatus(
+        window.Shop.auth.register({
           name: regName.value,
           phone: regPhone.value,
           email: regEmail.value,
           password: regPass.value,
-        })
-        .then(function (res) {
-          if (res.ok) {
-            successEl.classList.add("visible");
-            setTimeout(goNext, 900);
-          } else {
-            errorEl.textContent = res.error;
+        }),
+        {
+          loadTitle: "در حال ساخت حساب کاربری هستیم",
+          loadText: "لطفاً صبر کنید…",
+          okTitle: function () {
+            return "ثبت‌نام شما با موفقیت انجام شد";
+          },
+          okText: function (name) {
+            return (
+              (name ? name + " عزیز، " : "") +
+              "حساب شما آماده است؛ در حال انتقال به پنل کاربری…"
+            );
+          },
+          onFail: function (res) {
+            errorEl.textContent =
+              (res && res.error) || "خطایی رخ داد. دوباره تلاش کنید.";
             errorEl.classList.add("visible");
             btn.disabled = false;
-          }
-        });
+          },
+        },
+      );
     });
   }
 
@@ -244,18 +342,22 @@
       }
       const btn = loginForm.querySelector('button[type="submit"]');
       btn.disabled = true;
-      window.Shop.auth
-        .login(loginId.value, loginPass.value)
-        .then(function (res) {
-          if (res.ok) {
-            successEl.classList.add("visible");
-            setTimeout(goNext, 700);
-          } else {
-            errorEl.textContent = res.error;
-            errorEl.classList.add("visible");
-            btn.disabled = false;
-          }
-        });
+      runWithStatus(window.Shop.auth.login(loginId.value, loginPass.value), {
+        loadTitle: "در حال انتقال",
+        loadText: "لطفاً صبر کنید…",
+        okTitle: function (name) {
+          return "خوش آمدید" + (name ? "، " + name : "");
+        },
+        okText: function () {
+          return "ورود شما با موفقیت انجام شد؛ در حال انتقال به حساب کاربری…";
+        },
+        onFail: function (res) {
+          errorEl.textContent =
+            (res && res.error) || "خطایی رخ داد. دوباره تلاش کنید.";
+          errorEl.classList.add("visible");
+          btn.disabled = false;
+        },
+      });
     });
   }
 
