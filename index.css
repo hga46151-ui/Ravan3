@@ -1788,3 +1788,10 @@
     transition: none;
   }
 }
+
+/* phones/small tablets: swipe the banner, hide the arrows (they showed as a white strip) */
+@media (max-width: 700px) {
+  .banner-arrow {
+    display: none;
+  }
+}

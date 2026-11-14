@@ -11,9 +11,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Lalezar&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
+    /></noscript>
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="shop.css" />
     <link rel="stylesheet" href="index.css" />
@@ -23,9 +30,11 @@
       <div class="wrap nav">
         <a href="index.html" class="brand" aria-label="سعید خرمی، صفحه‌ی اصلی">
           <img
-            src="./images/logo.png"
+            src="./images/logo.webp"
             alt="سعید خرمی، روان‌شناس"
             class="brand-logo"
+            width="150"
+            height="147"
           />
         </a>
 
@@ -126,8 +135,11 @@
           <img
             class="psychology-character"
             loading="eager"
+            fetchpriority="high"
             decoding="async"
-            src="./images/character-q80.webp"
+            width="900"
+            height="600"
+            src="./images/character.webp"
             alt="فردی آرام و متفکر که روی صندلی نشسته است"
           />
           <span class="character-spark spark-one" aria-hidden="true"></span>
@@ -154,14 +166,16 @@
               <picture>
                 <source
                   media="(max-width: 480px)"
-                  srcset="images/banner-1-m.jpg"
+                  srcset="images/banner-1-m.webp"
                 />
                 <img
-                  src="images/banner-1.jpg"
+                  src="images/banner-1.webp"
                   alt="مشاوره حضوری در قم و تهران"
                   width="1600"
                   height="560"
                   loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
                   draggable="false"
                 />
               </picture>
@@ -174,10 +188,10 @@
               <picture>
                 <source
                   media="(max-width: 480px)"
-                  srcset="images/banner-2-m.jpg"
+                  srcset="images/banner-2-m.webp"
                 />
                 <img
-                  src="images/banner-2.jpg"
+                  src="images/banner-2.webp"
                   alt="مشاوره آنلاین و تلفنی"
                   width="1600"
                   height="560"
@@ -194,10 +208,10 @@
               <picture>
                 <source
                   media="(max-width: 480px)"
-                  srcset="images/banner-3-m.jpg"
+                  srcset="images/banner-3-m.webp"
                 />
                 <img
-                  src="images/banner-3.jpg"
+                  src="images/banner-3.webp"
                   alt="مشاوره پیش از ازدواج و زوج‌درمانی"
                   width="1600"
                   height="560"
@@ -214,10 +228,10 @@
               <picture>
                 <source
                   media="(max-width: 480px)"
-                  srcset="images/banner-4-m.jpg"
+                  srcset="images/banner-4-m.webp"
                 />
                 <img
-                  src="images/banner-4.jpg"
+                  src="images/banner-4.webp"
                   alt="مشاوره نوجوان، فردی و تحصیلی"
                   width="1600"
                   height="560"
@@ -275,7 +289,14 @@
       <div class="wrap">
         <div>
           <div class="avatar-frame">
-            <img src="./images/IMG_20241205_190001_303.jpg" alt="" />
+            <img
+              src="./images/about-photo.webp"
+              alt=""
+              width="560"
+              height="840"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <ul class="credential-list">
             <li><b>تخصص</b> روانشناس، متخصص واقعیت‌درمانی</li>
@@ -693,8 +714,8 @@
       </span>
       <span class="back-to-top-label">بازگشت به بالا</span>
     </a>
-    <script src="base.js"></script>
-    <script src="shop.js"></script>
-    <script src="index.js"></script>
+    <script src="base.js" defer></script>
+    <script src="shop.js" defer></script>
+    <script src="index.js" defer></script>
   </body>
 </html>

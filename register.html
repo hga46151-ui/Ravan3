@@ -7,9 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Lalezar&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript
+      ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
+    /></noscript>
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="shop.css" />
     <link rel="stylesheet" href="register.css" />
@@ -19,9 +24,11 @@
       <div class="wrap nav">
         <a href="index.html" class="brand" aria-label="سعید خرمی، صفحه‌ی اصلی">
           <img
-            src="./images/logo.png"
+            src="./images/logo.webp"
             alt="سعید خرمی، روان‌شناس"
             class="brand-logo"
+            width="150"
+            height="147"
           />
         </a>
 
@@ -427,8 +434,8 @@
       </span>
       <span class="back-home-label">خانه</span>
     </a>
-    <script src="base.js"></script>
-    <script src="shop.js"></script>
-    <script src="register.js"></script>
+    <script src="base.js" defer></script>
+    <script src="shop.js" defer></script>
+    <script src="register.js" defer></script>
   </body>
 </html>

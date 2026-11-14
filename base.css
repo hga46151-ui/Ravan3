@@ -1471,3 +1471,11 @@ header nav.links a.active {
     animation: none;
   }
 }
+
+/* animations are paused while their section is far outside the viewport (see base.js) */
+.is-offscreen,
+.is-offscreen *,
+.is-offscreen *::before,
+.is-offscreen *::after {
+  animation-play-state: paused !important;
+}

@@ -330,3 +330,22 @@
     }
   });
 })();
+
+/* Performance: pause CSS animations in sections that are far off-screen,
+   so phones don't keep animating things nobody can see. */
+(function () {
+  if (!("IntersectionObserver" in window)) return;
+  var blocks = document.querySelectorAll("main > section, body > section, footer");
+  if (!blocks.length) return;
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle("is-offscreen", !e.isIntersecting);
+      });
+    },
+    { rootMargin: "250px 0px 250px 0px" },
+  );
+  blocks.forEach(function (b) {
+    io.observe(b);
+  });
+})();
