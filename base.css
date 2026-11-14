@@ -1479,3 +1479,289 @@ header nav.links a.active {
 .is-offscreen *::after {
   animation-play-state: paused !important;
 }
+
+/* =====================================================================
+   Phones & tablets: the navbar lives at the BOTTOM of the screen
+   - floating bar pinned to the bottom edge
+   - the menu opens UPWARDS
+   - account button (left) and back-to-top (right) sit just above the bar
+   ===================================================================== */
+@media (max-width: 880px) {
+  :root {
+    --bar-h: 58px; /* nav bar height */
+    --bar-gap: 10px; /* gap between the bar and the screen edge */
+    --bar-safe: env(safe-area-inset-bottom, 0px);
+    --bar-total: calc(var(--bar-h) + var(--bar-gap) + var(--bar-safe));
+  }
+
+  html {
+    scroll-padding-top: 16px;
+  }
+
+  /* room under the page content so the bar never hides the footer */
+  body {
+    padding-bottom: calc(var(--bar-total) + 14px);
+  }
+
+  header {
+    position: fixed;
+    z-index: 70; /* above the floating buttons, so an open menu covers them */
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 0 calc(var(--bar-gap) + var(--bar-safe));
+  }
+
+  header .nav {
+    height: var(--bar-h);
+    box-shadow:
+      0 -6px 26px rgba(48, 58, 54, 0.14),
+      0 8px 22px rgba(48, 58, 54, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  header.scrolled .nav {
+    box-shadow:
+      0 -8px 30px rgba(48, 58, 54, 0.2),
+      0 8px 22px rgba(48, 58, 54, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  /* menu opens upwards, above the bar */
+  nav.links {
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translateY(12px);
+  }
+
+  nav.links.open {
+    transform: translateY(0);
+  }
+
+  /* the two floating buttons: left = sign up / login, right = back to top */
+  .fab-auth,
+  .back-to-top {
+    bottom: calc(var(--bar-total) + 12px);
+  }
+
+  .fab-auth {
+    left: 16px;
+  }
+
+  .back-to-top {
+    right: 16px;
+  }
+
+  /* messages float above the buttons */
+  .shop-toast-stack {
+    bottom: calc(var(--bar-total) + 78px);
+  }
+}
+
+/* =====================================================================
+   Phones & tablets: professional bottom TAB BAR
+   [ دوره‌ها ][ سبد ][ رزرو (raised) ][ حساب ][ بیشتر ]
+   ===================================================================== */
+.tab-link {
+  display: none;
+}
+
+@media (max-width: 880px) {
+  :root {
+    --bar-h: 64px;
+  }
+
+  header .nav {
+    justify-content: center;
+    gap: 0;
+    padding: 0 6px;
+    border-radius: 24px;
+  }
+
+  header .nav .brand,
+  header .nav .nav-sep {
+    display: none;
+  }
+
+  header .nav-actions {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  /* every tab: icon over label */
+  header .nav-actions .tab-link,
+  header .nav-actions .tool-btn,
+  header .nav-actions .burger {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 2px;
+    margin: 0;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ink-soft);
+    font-family: inherit;
+    font-size: 10.5px;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    transform: none;
+    transition:
+      color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  header .nav-actions .tab-link svg,
+  header .nav-actions .tool-btn svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  header .nav-actions .tab-link span,
+  header .nav-actions .tool-label {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* order: courses, cart, booking, account, more (right to left) */
+  header .nav-actions .tab-link {
+    order: 1;
+    display: flex;
+  }
+  header .nav-actions #toolCart {
+    order: 2;
+  }
+  header .nav-actions .nav-cta {
+    order: 3;
+  }
+  header .nav-actions #toolUser {
+    order: 4;
+  }
+  header .nav-actions .burger {
+    order: 5;
+  }
+
+  /* labels that only exist as aria-labels */
+  header .nav-actions #toolCart::after {
+    content: "سبد خرید";
+  }
+
+  header .nav-actions .burger::after {
+    content: "بیشتر";
+  }
+
+  header .nav-actions .tool-btn:hover,
+  header .nav-actions .tab-link:hover,
+  header .nav-actions .burger:hover {
+    background: rgba(69, 107, 92, 0.08);
+    color: var(--accent-deep);
+    transform: none;
+  }
+
+  /* active tab: green colour + small indicator on top */
+  header .nav-actions .tab-link.active,
+  header .nav-actions .tool-btn.is-active,
+  header .nav-actions .burger.active {
+    color: var(--accent-deep);
+    background: rgba(69, 107, 92, 0.1);
+  }
+
+  header .nav-actions .tab-link.active::before,
+  header .nav-actions .tool-btn.is-active::before,
+  header .nav-actions .burger.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 22px;
+    height: 3px;
+    margin-left: -11px;
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(90deg, var(--accent), var(--teal));
+  }
+
+  header .nav-actions .tab-link {
+    position: relative;
+  }
+
+  /* burger lines become a small icon */
+  header .nav-actions .burger {
+    position: relative;
+    gap: 4px;
+  }
+
+  header .nav-actions .burger span {
+    width: 20px;
+  }
+
+  header .nav-actions .burger.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  header .nav-actions .burger.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* cart badge sits on the icon */
+  header .nav-actions .cart-badge {
+    top: 7px;
+    right: auto;
+    left: calc(50% + 4px);
+  }
+
+  /* booking: raised centre button */
+  header .nav-actions .nav-cta {
+    flex: 0 0 92px;
+    align-self: flex-start;
+    height: 56px;
+    margin: -22px 4px 0;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 4px solid #fff;
+    font-size: 12.5px;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  /* the open menu clears the raised button */
+  nav.links {
+    bottom: calc(100% + 32px);
+  }
+
+  /* tablets: keep the bar a comfortable width */
+  header .nav {
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 360px) {
+  header .nav-actions .nav-cta {
+    flex-basis: 82px;
+    font-size: 11.5px;
+  }
+
+  header .nav-actions .tab-link,
+  header .nav-actions .tool-btn,
+  header .nav-actions .burger {
+    font-size: 10px;
+  }
+}

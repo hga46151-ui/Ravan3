@@ -237,7 +237,9 @@
 /* ---------- Header: scrolled shadow, active link, same-page scrolling ---------- */
 (function () {
   const header = document.querySelector("header");
-  const links = Array.from(document.querySelectorAll("#navLinks a[data-nav]"));
+  const links = Array.from(
+    document.querySelectorAll("#navLinks a[data-nav], .tab-link[data-nav]"),
+  );
   if (!header) return;
 
   const file = (
@@ -335,7 +337,9 @@
    so phones don't keep animating things nobody can see. */
 (function () {
   if (!("IntersectionObserver" in window)) return;
-  var blocks = document.querySelectorAll("main > section, body > section, footer");
+  var blocks = document.querySelectorAll(
+    "main > section, body > section, footer",
+  );
   if (!blocks.length) return;
   var io = new IntersectionObserver(
     function (entries) {
