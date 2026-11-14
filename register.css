@@ -1,0 +1,1097 @@
+/* Styles for register.html (sign up / log in).
+   Loaded after styles.css, so it uses the same :root variables,
+   fonts, .wrap/.btn/.field/.check-row base rules, etc. */
+
+/* ---------- Auth (sign up / log in) ---------- */
+.auth-section {
+  padding: 72px 0 96px;
+}
+.auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  background: var(--card);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.auth-panel {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--accent), var(--accent-deep));
+  color: var(--white);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-panel::before,
+.auth-panel::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+.auth-panel::before {
+  width: 260px;
+  height: 260px;
+  top: -90px;
+  left: -70px;
+}
+.auth-panel::after {
+  width: 160px;
+  height: 160px;
+  bottom: -50px;
+  right: -40px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.auth-panel-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/auth-pattern-q80.webp");
+  background-repeat: repeat;
+  background-size: 560px 373px;
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: authPatternDrift 60s linear infinite;
+  will-change: background-position;
+}
+@keyframes authPatternDrift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -560px -373px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-panel-pattern {
+    animation: none;
+  }
+}
+
+.auth-kicker {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+  position: relative;
+}
+.auth-panel h2 {
+  margin-top: 12px;
+  font-size: clamp(24px, 3vw, 32px);
+  position: relative;
+}
+.auth-panel-lede {
+  margin-top: 16px;
+  opacity: 0.92;
+  line-height: 1.9;
+  max-width: 34ch;
+  font-size: 15px;
+  position: relative;
+}
+.auth-benefits {
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+.auth-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+}
+.auth-benefits svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--white);
+  opacity: 0.9;
+}
+.auth-form-side {
+  padding: 56px 48px;
+}
+.auth-tabs {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  margin-bottom: 30px;
+}
+.auth-tab {
+  padding: 10px 26px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  background: var(--paper);
+  cursor: pointer;
+  border: 0;
+  font-family: "Vazirmatn", sans-serif;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.auth-tab + .auth-tab {
+  border-right: 1px solid var(--line);
+}
+.auth-tab.active {
+  background: var(--accent);
+  color: var(--white);
+}
+.auth-form-side h1 {
+  font-size: clamp(24px, 3vw, 30px);
+}
+.auth-switch {
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+.auth-switch button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--accent-deep);
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 1px solid currentColor;
+}
+.auth-form {
+  margin-top: 28px;
+}
+.hidden {
+  display: none;
+}
+.field-password .input-wrap {
+  position: relative;
+}
+.field-password input {
+  padding-left: 46px;
+}
+.toggle-pass {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.toggle-pass svg {
+  width: 19px;
+  height: 19px;
+}
+.toggle-pass .icon-off {
+  display: none;
+}
+.toggle-pass.is-visible .icon-on {
+  display: none;
+}
+.toggle-pass.is-visible .icon-off {
+  display: block;
+}
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.check-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.check-row a {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.auth-form .btn {
+  align-self: stretch;
+  text-align: center;
+  margin-top: 4px;
+}
+.auth-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.auth-meta-row a {
+  color: var(--accent-deep);
+  border-bottom: 1px solid currentColor;
+}
+.form-success {
+  display: none;
+  margin-top: 4px;
+  color: var(--sage);
+  font-size: 14px;
+  font-weight: 600;
+}
+.form-success.visible {
+  display: block;
+}
+.field-error {
+  display: none;
+  margin-top: -8px;
+  color: var(--brick);
+  font-size: 12.5px;
+}
+.field-error.visible {
+  display: block;
+}
+.auth-form .field input.has-error {
+  border-color: var(--brick);
+}
+.auth-form .check-row.has-error span {
+  color: var(--brick);
+}
+
+@media (max-width: 880px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+  }
+  .auth-panel {
+    padding: 36px 28px;
+    order: -1;
+  }
+  .auth-panel-lede {
+    max-width: none;
+  }
+  .auth-form-side {
+    padding: 36px 28px;
+  }
+}
+
+/* ---------- Back-to-home button (register.html only) ----------
+   Independent of styles.css's .back-to-top: this one sits on the
+   LEFT (like the fab-auth button), so it expands rightward on
+   hover instead of leftward. */
+.back-home {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  direction: ltr;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 10px 26px rgba(48, 58, 54, 0.3);
+  overflow: hidden;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.back-home.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-home-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+.back-home-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.back-home-label {
+  direction: rtl;
+  text-align: right;
+  color: var(--white);
+  font-size: 14.5px;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-right: 0;
+  transition:
+    max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease,
+    padding-right 0.45s ease;
+}
+.back-home.open .back-home-label {
+  max-width: 160px;
+  opacity: 1;
+  padding-right: 18px;
+}
+@media (max-width: 560px) {
+  .back-home {
+    left: 16px;
+    bottom: 16px;
+  }
+}
+
+/* =====================================================================
+   Register page — same enchanted mood as the home page
+   ===================================================================== */
+.auth-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.auth-section::before,
+.auth-section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.auth-section::before {
+  width: 480px;
+  height: 480px;
+  top: -140px;
+  inset-inline-end: -120px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 157, 182, 0.28),
+    transparent 70%
+  );
+  animation: auroraA 17s ease-in-out infinite alternate;
+}
+.auth-section::after {
+  width: 420px;
+  height: 420px;
+  bottom: 40px;
+  inset-inline-start: -140px;
+  background: radial-gradient(
+    circle,
+    rgba(217, 178, 111, 0.32),
+    transparent 70%
+  );
+  animation: auroraB 20s ease-in-out infinite alternate;
+}
+.auth-grid {
+  border-radius: 22px;
+  border-color: rgba(69, 107, 92, 0.18);
+  box-shadow:
+    0 24px 60px rgba(48, 58, 54, 0.14),
+    0 0 0 0 rgba(217, 178, 111, 0.35);
+  animation: gridBreath 6s ease-in-out infinite;
+}
+@keyframes gridBreath {
+  0%,
+  100% {
+    box-shadow:
+      0 24px 60px rgba(48, 58, 54, 0.14),
+      0 0 0 0 rgba(217, 178, 111, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 30px 70px rgba(48, 58, 54, 0.18),
+      0 0 0 10px rgba(217, 178, 111, 0);
+  }
+}
+
+/* Panel: drifting light, floating orbs, living gradient */
+.auth-panel {
+  background: linear-gradient(
+    160deg,
+    var(--accent),
+    #2f7f84 55%,
+    var(--accent-deep)
+  );
+  background-size: 160% 160%;
+  animation: panelFlow 14s ease-in-out infinite alternate;
+}
+@keyframes panelFlow {
+  to {
+    background-position: 100% 100%;
+  }
+}
+.auth-panel::before {
+  animation: orbFloatA 11s ease-in-out infinite alternate;
+}
+.auth-panel::after {
+  animation: orbFloatB 13s ease-in-out infinite alternate;
+}
+@keyframes orbFloatA {
+  to {
+    transform: translate(60px, 50px) scale(1.18);
+  }
+}
+@keyframes orbFloatB {
+  to {
+    transform: translate(-50px, -60px) scale(1.25);
+  }
+}
+.auth-kicker::before {
+  content: "✦";
+  display: inline-block;
+  margin-inline-end: 8px;
+  color: var(--gold);
+  animation: starTwinkle 2.6s ease-in-out infinite;
+}
+.auth-panel h2 {
+  background: linear-gradient(100deg, #fff 0%, #f6e4bd 45%, #fff 90%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: inkFlow 9s ease-in-out infinite;
+}
+.auth-benefits li {
+  animation: benefitIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.auth-benefits li:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.auth-benefits li:nth-child(2) {
+  animation-delay: 0.7s;
+}
+.auth-benefits li:nth-child(3) {
+  animation-delay: 0.9s;
+}
+@keyframes benefitIn {
+  from {
+    opacity: 0;
+    transform: translateX(26px);
+  }
+}
+.auth-benefits svg path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: tickDraw 0.7s ease forwards;
+}
+.auth-benefits li:nth-child(1) svg path {
+  animation-delay: 0.9s;
+}
+.auth-benefits li:nth-child(2) svg path {
+  animation-delay: 1.1s;
+}
+.auth-benefits li:nth-child(3) svg path {
+  animation-delay: 1.3s;
+}
+@keyframes tickDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Tabs */
+.auth-tabs {
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(48, 58, 54, 0.08);
+}
+.auth-tab {
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.25s ease;
+}
+.auth-tab:hover:not(.active) {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+.auth-tab.active {
+  background: linear-gradient(135deg, var(--accent), #3a8a86);
+}
+
+/* Panes slide in when shown; fields cascade */
+#registerPane:not(.hidden),
+#loginPane:not(.hidden) {
+  animation: paneIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes paneIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+.auth-form > * {
+  animation: fieldIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.auth-form > :nth-child(1) {
+  animation-delay: 0.1s;
+}
+.auth-form > :nth-child(2) {
+  animation-delay: 0.17s;
+}
+.auth-form > :nth-child(3) {
+  animation-delay: 0.24s;
+}
+.auth-form > :nth-child(4) {
+  animation-delay: 0.31s;
+}
+.auth-form > :nth-child(5) {
+  animation-delay: 0.38s;
+}
+.auth-form > :nth-child(n + 6) {
+  animation-delay: 0.45s;
+}
+@keyframes fieldIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.auth-form > .form-success.visible {
+  animation: popIn 0.6s cubic-bezier(0.2, 1.5, 0.3, 1) both;
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Inputs: golden halo on focus */
+.auth-form .field input {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+.auth-form .field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px rgba(217, 178, 111, 0.28),
+    0 8px 20px rgba(69, 107, 92, 0.12);
+  transform: translateY(-1px);
+}
+.auth-form .field:focus-within label {
+  color: var(--accent-deep);
+}
+.auth-form .field label {
+  transition: color 0.3s ease;
+}
+.auth-form .field-error.visible {
+  animation: shake 0.45s ease;
+}
+@keyframes shake {
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+.toggle-pass {
+  transition: color 0.25s ease;
+}
+.toggle-pass:hover {
+  color: var(--accent);
+}
+.check-row input[type="checkbox"] {
+  transition: transform 0.25s cubic-bezier(0.2, 1.5, 0.3, 1);
+}
+.check-row input[type="checkbox"]:checked {
+  transform: scale(1.2);
+}
+
+.back-home {
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    #3a8a86 55%,
+    var(--teal) 100%
+  );
+  background-size: 220% 220%;
+  box-shadow:
+    0 10px 26px rgba(48, 58, 54, 0.3),
+    0 0 0 0 rgba(217, 178, 111, 0.55);
+  opacity: 0;
+  transform: translateY(26px) scale(0.55);
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.2, 1.5, 0.3, 1),
+    translate 0.25s ease,
+    scale 0.25s ease;
+}
+.back-home.visible {
+  opacity: 1;
+  transform: none;
+  animation:
+    fabGlow 3.4s ease-in-out 0.6s infinite,
+    fabHue 9s ease-in-out infinite;
+}
+.back-home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  left: -70%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: sweep 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+.back-home:hover {
+  translate: 0 -4px;
+  scale: 1.07;
+}
+.back-home:active {
+  scale: 0.96;
+}
+.back-home-icon svg {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.2, 1.5, 0.3, 1);
+}
+.back-home:hover .back-home-icon svg {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+.back-home-icon svg {
+  animation: houseHop 4s ease-in-out infinite;
+}
+.back-home:hover .back-home-icon svg {
+  animation: none;
+}
+.back-home::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, var(--gold) 60%);
+  box-shadow: 0 0 8px 2px rgba(217, 178, 111, 0.8);
+  animation: starTwinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-section::before,
+  .auth-section::after,
+  .auth-grid,
+  .auth-panel,
+  .auth-panel::before,
+  .auth-panel::after,
+  .auth-kicker::before,
+  .auth-panel h2,
+  .auth-form > *,
+  #registerPane,
+  #loginPane,
+  .back-home,
+  .back-home::before,
+  .back-home::after,
+  .back-home-icon svg {
+    animation: none !important;
+  }
+  .auth-benefits li,
+  .auth-benefits svg path {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  .back-home {
+    transform: none;
+  }
+}
+
+/* ---------- Softer motion: home button + account form buttons ---------- */
+.back-home {
+  transform: translateY(14px) scale(0.9);
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s var(--soft),
+    translate 0.5s var(--soft),
+    scale 0.5s var(--soft);
+}
+.back-home.visible {
+  transform: none;
+  animation-duration: 4.8s, 16s;
+}
+.back-home::before {
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.24),
+    transparent
+  );
+  animation-duration: 9s;
+}
+.back-home:hover {
+  translate: 0 -2px;
+  scale: 1.035;
+}
+.back-home:active {
+  scale: 0.98;
+}
+.back-home-icon svg {
+  transition: transform 0.6s var(--soft);
+  animation-duration: 6s;
+}
+.back-home:hover .back-home-icon svg {
+  transform: rotate(-6deg) scale(1.06);
+}
+.back-home::after {
+  animation-duration: 3.6s;
+}
+.back-home-label {
+  transition:
+    max-width 0.7s var(--soft),
+    opacity 0.5s ease,
+    padding-right 0.7s var(--soft);
+}
+.auth-form .btn {
+  transition:
+    transform 0.5s var(--soft),
+    box-shadow 0.5s ease,
+    background-color 0.4s ease;
+}
+.auth-tab {
+  transition:
+    background 0.5s ease,
+    color 0.5s ease;
+}
+.auth-form .field input {
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease,
+    transform 0.5s var(--soft);
+}
+@media (prefers-reduced-motion: reduce) {
+  .back-home {
+    transform: none;
+  }
+}
+
+/* =====================================================================
+   Responsive — form first, shorter blocks (tablets ≤ 880px, phones ≤ 560px)
+   ===================================================================== */
+@media (max-width: 880px) {
+  .auth-section {
+    padding: 28px 0 56px;
+  }
+
+  /* the form comes first; the promo block moves under it */
+  .auth-panel {
+    order: 2;
+    padding: 26px 24px;
+  }
+
+  .auth-form-side {
+    padding: 26px 24px;
+  }
+
+  .auth-tabs {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .auth-section {
+    padding: 18px 0 40px;
+  }
+
+  .auth-panel {
+    padding: 22px 18px;
+  }
+
+  .auth-benefits {
+    display: none;
+  }
+
+  .auth-form-side {
+    padding: 22px 18px;
+  }
+
+  .auth-tabs {
+    display: flex;
+    width: 100%;
+  }
+
+  .auth-tab {
+    flex: 1;
+  }
+}
+
+/* =====================================================================
+   Responsive v2 — tighter register form on tablets/phones
+   Paired fields (name+phone, password+repeat) sit side by side.
+   ===================================================================== */
+@media (max-width: 880px) {
+  .auth-form-side h1 {
+    font-size: 24px;
+  }
+
+  .auth-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px 10px;
+    margin-top: 14px;
+  }
+
+  .auth-form > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .auth-form > .field:nth-child(1),
+  .auth-form > .field:nth-child(2),
+  .auth-form > .field:nth-child(4),
+  .auth-form > .field:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .auth-form .field label {
+    font-size: 12.5px;
+    margin-bottom: 5px;
+  }
+
+  .auth-form .field input {
+    padding: 10px 12px;
+    font-size: 14.5px;
+  }
+
+  .auth-form .field-password input {
+    padding-left: 38px;
+  }
+
+  .auth-form .toggle-pass {
+    width: 32px;
+    height: 32px;
+    left: 2px;
+  }
+
+  .auth-form .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .auth-panel-lede {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+}
+
+@media (max-width: 560px) {
+  /* promo block under the form: keep only a slim headline */
+  .auth-panel-lede {
+    display: none;
+  }
+
+  .auth-panel {
+    padding: 16px 18px;
+  }
+
+  .auth-panel h2 {
+    font-size: 19px;
+    margin: 4px 0 0;
+  }
+}
+
+/* =====================================================================
+   Status dialog — "creating your account…" → "registered successfully"
+   ===================================================================== */
+.status-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(48, 58, 54, 0.38);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0s linear 0.35s;
+}
+
+.status-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease;
+}
+
+body.status-open {
+  overflow: hidden;
+}
+
+.status-card {
+  width: min(100%, 380px);
+  padding: 30px 26px 24px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid rgba(69, 107, 92, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(48, 58, 54, 0.3);
+  transform: translateY(18px) scale(0.94);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.status-overlay.show .status-card {
+  transform: none;
+}
+
+.status-icon {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+}
+
+.status-spinner {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 4px solid rgba(69, 107, 92, 0.15);
+  border-top-color: var(--teal);
+  border-inline-end-color: var(--accent);
+  animation: statusSpin 0.9s linear infinite;
+}
+
+.status-check {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.status-check-ring {
+  fill: rgba(69, 107, 92, 0.1);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-dasharray: 145;
+  stroke-dashoffset: 145;
+}
+
+.status-check-tick {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+}
+
+.status-card.is-loading .status-spinner {
+  display: block;
+}
+
+.status-card.is-success .status-spinner {
+  display: none;
+}
+
+.status-card.is-success .status-check {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.status-card.is-success .status-check-ring {
+  animation: statusDraw 0.7s ease forwards;
+}
+
+.status-card.is-success .status-check-tick {
+  animation: statusDraw 0.45s ease 0.45s forwards;
+}
+
+.status-title {
+  font-size: 19px;
+  line-height: 1.7;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.status-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.status-bar,
+.status-go {
+  display: none;
+}
+
+.status-card.is-success .status-bar {
+  display: block;
+  height: 4px;
+  margin: 18px 0 14px;
+  border-radius: 4px;
+  background: rgba(69, 107, 92, 0.12);
+  overflow: hidden;
+}
+
+.status-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--teal), var(--accent));
+  transform-origin: right center;
+}
+
+.status-card.is-success .status-go {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@keyframes statusSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes statusDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes statusBar {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-spinner {
+    animation-duration: 2.4s;
+  }
+  .status-card,
+  .status-overlay {
+    transition: none;
+  }
+  .status-card.is-success .status-check-ring,
+  .status-card.is-success .status-check-tick {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
