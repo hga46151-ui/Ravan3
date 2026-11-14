@@ -341,15 +341,26 @@ html.shop-lock {
 }
 
 /* ---------- Toast ---------- */
-.shop-toast {
+.shop-toast-stack {
   position: fixed;
   left: 50%;
   bottom: 28px;
   z-index: 130;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: max-content;
   max-width: calc(100vw - 32px);
+  transform: translateX(-50%);
+  pointer-events: none; /* only the bubbles catch clicks */
+}
+
+.shop-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
   padding: 12px 20px 12px 18px;
   border-radius: 999px;
   background: var(--ink);
@@ -357,8 +368,9 @@ html.shop-lock {
   font-size: 14px;
   box-shadow: 0 14px 34px rgba(48, 58, 54, 0.35);
   opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, 18px);
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(18px) scale(0.96);
   transition:
     opacity 0.45s ease,
     transform 0.6s var(--soft);
@@ -366,7 +378,13 @@ html.shop-lock {
 
 .shop-toast.show {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: none;
+}
+
+.shop-toast.leaving {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.97);
+  transition-duration: 0.4s;
 }
 
 .shop-toast-icon {
@@ -449,4 +467,22 @@ html.shop-lock {
   75% {
     transform: translateX(3px);
   }
+}
+
+/* drawer empty state for visitors who are not signed up yet */
+.cart-empty-login {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: color 0.3s ease;
+}
+
+.cart-empty-login:hover {
+  color: var(--accent-deep);
+}
+
+/* the footer must really disappear when the drawer is empty */
+.cart-foot[hidden] {
+  display: none;
 }

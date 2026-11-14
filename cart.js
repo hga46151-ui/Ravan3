@@ -26,10 +26,32 @@
       $("cartBox").hidden = true;
       $("cartSub").textContent = "";
       var d = el("div", "cart-empty-state");
-      d.appendChild(el("p", null, "سبد خرید شما خالی است."));
-      var a = el("a", "btn btn-primary", "مشاهده‌ی دوره‌ها");
-      a.href = "index.html#courses";
-      d.appendChild(a);
+      if (!me) {
+        /* not registered yet: ask them to sign up first */
+        d.appendChild(
+          el("p", "cart-empty-lead", "برای شروع، ابتدا ثبت‌نام کنید."),
+        );
+        d.appendChild(
+          el(
+            "p",
+            null,
+            "با ساخت حساب کاربری می‌توانید دوره‌ها را به سبد اضافه کنید و خرید را کامل کنید.",
+          ),
+        );
+        var acts = el("div", "cart-empty-actions");
+        var reg = el("a", "btn btn-primary", "ثبت‌نام");
+        reg.href = "register.html";
+        var log = el("a", "btn btn-ghost", "ورود به حساب");
+        log.href = "register.html#login";
+        acts.appendChild(reg);
+        acts.appendChild(log);
+        d.appendChild(acts);
+      } else {
+        d.appendChild(el("p", null, "سبد خرید شما خالی است."));
+        var a = el("a", "btn btn-primary", "مشاهده‌ی دوره‌ها");
+        a.href = "index.html#courses";
+        d.appendChild(a);
+      }
       list.appendChild(d);
       return;
     }

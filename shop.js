@@ -496,17 +496,43 @@
   var refs = {};
   var lastFocus = null;
 
+  var TOAST_MS = 7000; /* how long the toast message stays on screen */
+
+  /* Toasts stack: every message gets its own bubble with its own 7 s timer.
+     New ones appear at the bottom and push older ones up. */
+  var TOAST_MAX = 5; /* oldest bubble is dropped beyond this many */
+
+  function dismissToast(t) {
+    if (!t || t._gone) return;
+    t._gone = true;
+    clearTimeout(t._timer);
+    t.classList.remove("show");
+    t.classList.add("leaving");
+    setTimeout(function () {
+      if (t.parentNode) t.parentNode.removeChild(t);
+    }, 600);
+  }
+
   ui.toast = function (message, kind) {
-    var t = refs.toast;
-    if (!t) return;
-    t.className = "shop-toast" + (kind ? " " + kind : "");
-    t.querySelector(".shop-toast-text").textContent = message;
+    var stack = refs.toastStack;
+    if (!stack) return;
+    var t = el("div", "shop-toast" + (kind ? " " + kind : ""));
+    t.setAttribute("role", "status");
+    var ti = el("span", "shop-toast-icon");
+    ti.appendChild(icon("check"));
+    t.appendChild(ti);
+    t.appendChild(el("span", "shop-toast-text", message));
+    stack.appendChild(t);
     void t.offsetWidth;
     t.classList.add("show");
-    clearTimeout(ui._toastTimer);
-    ui._toastTimer = setTimeout(function () {
-      t.classList.remove("show");
-    }, 2600);
+    t._timer = setTimeout(function () {
+      dismissToast(t);
+    }, TOAST_MS);
+    t.addEventListener("click", function () {
+      dismissToast(t);
+    });
+    var live = stack.querySelectorAll(".shop-toast:not(.leaving)");
+    for (var i = 0; i < live.length - TOAST_MAX; i++) dismissToast(live[i]);
   };
 
   ui.openDrawer = function () {
@@ -540,22 +566,42 @@
       var art = el("div", "cart-empty-art");
       art.appendChild(icon("cart"));
       empty.appendChild(art);
-      empty.appendChild(el("p", "cart-empty-title", "سبد خرید شما خالی است"));
-      empty.appendChild(
-        el(
-          "p",
-          "cart-empty-sub",
-          "از بخش دوره‌ها، دوره‌ی دلخواه را اضافه کنید.",
-        ),
-      );
-      var link = el("a", "btn btn-ghost", "مشاهده دوره‌ها");
-      link.href =
-        location.pathname.indexOf("index.html") !== -1 ||
-        /\/$/.test(location.pathname)
-          ? "#courses"
-          : "index.html#courses";
-      link.addEventListener("click", ui.closeDrawer);
-      empty.appendChild(link);
+      if (!auth.user()) {
+        /* not registered yet: ask them to sign up first */
+        empty.appendChild(
+          el("p", "cart-empty-title", "برای شروع، ابتدا ثبت‌نام کنید"),
+        );
+        empty.appendChild(
+          el(
+            "p",
+            "cart-empty-sub",
+            "با ساخت حساب کاربری می‌توانید دوره‌ها را به سبد اضافه کنید و خرید را کامل کنید.",
+          ),
+        );
+        var reg = el("a", "btn btn-primary", "ثبت‌نام");
+        reg.href = "register.html";
+        var log = el("a", "cart-empty-login", "قبلاً ثبت‌نام کرده‌ام؟ ورود");
+        log.href = "register.html#login";
+        empty.appendChild(reg);
+        empty.appendChild(log);
+      } else {
+        empty.appendChild(el("p", "cart-empty-title", "سبد خرید شما خالی است"));
+        empty.appendChild(
+          el(
+            "p",
+            "cart-empty-sub",
+            "از بخش دوره‌ها، دوره‌ی دلخواه را اضافه کنید.",
+          ),
+        );
+        var link = el("a", "btn btn-ghost", "مشاهده دوره‌ها");
+        link.href =
+          location.pathname.indexOf("index.html") !== -1 ||
+          /\/$/.test(location.pathname)
+            ? "#courses"
+            : "index.html#courses";
+        link.addEventListener("click", ui.closeDrawer);
+        empty.appendChild(link);
+      }
       list.appendChild(empty);
       foot.hidden = true;
       return;
@@ -660,16 +706,11 @@
       if (e.key === "Escape") ui.closeDrawer();
     });
 
-    /* toast */
-    var toast = el("div", "shop-toast");
-    toast.setAttribute("role", "status");
-    toast.setAttribute("aria-live", "polite");
-    var ti = el("span", "shop-toast-icon");
-    ti.appendChild(icon("check"));
-    toast.appendChild(ti);
-    toast.appendChild(el("span", "shop-toast-text", ""));
-    document.body.appendChild(toast);
-    refs.toast = toast;
+    /* toast stack (bubbles are created on demand by ui.toast) */
+    var stack = el("div", "shop-toast-stack");
+    stack.setAttribute("aria-live", "polite");
+    document.body.appendChild(stack);
+    refs.toastStack = stack;
 
     /* add-to-cart buttons anywhere on the page */
     document.addEventListener("click", function (e) {

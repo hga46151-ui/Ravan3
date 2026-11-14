@@ -447,3 +447,33 @@
     line-height: 1.8;
   }
 }
+
+/* empty cart for visitors who are not signed up yet */
+.cart-empty-state .cart-empty-lead {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.cart-empty-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 560px) {
+  .cart-empty-state {
+    padding: 28px 16px;
+  }
+
+  .cart-empty-state .cart-empty-lead {
+    font-size: 16px;
+  }
+
+  .cart-empty-actions .btn {
+    flex: 1 1 140px;
+    justify-content: center;
+  }
+}
