@@ -486,3 +486,67 @@ html.shop-lock {
 .cart-foot[hidden] {
   display: none;
 }
+
+/* toast with an action button ("undo") + a thin countdown line */
+.shop-toast.has-action {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 14px;
+}
+
+.shop-toast.undo .shop-toast-icon {
+  background: var(--gold);
+}
+
+.shop-toast-action {
+  flex-shrink: 0;
+  margin-inline-start: 6px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--gold);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    transform 0.4s var(--soft),
+    box-shadow 0.4s ease,
+    background 0.3s ease;
+}
+
+.shop-toast-action:hover,
+.shop-toast-action:focus-visible {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.shop-toast.has-action::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  transform-origin: right center;
+  animation: toastCountdown var(--toast-ms, 7s) linear forwards;
+}
+
+@keyframes toastCountdown {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-toast.has-action::after {
+    animation: none;
+  }
+}

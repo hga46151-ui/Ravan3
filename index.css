@@ -1795,3 +1795,90 @@
     display: none;
   }
 }
+
+/* =====================================================================
+   Softer corners — tags, expertise boxes, course cards
+   ===================================================================== */
+.paper-tag {
+  border-radius: 999px;
+  padding-inline: 18px;
+}
+
+/* expertise: the shared-border table becomes separate rounded cards */
+.expertise-grid {
+  border: 0;
+  gap: 16px;
+}
+
+.expertise-item {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--card);
+}
+
+/* courses: rounded card, the colour tab is clipped to the curve */
+.course-card {
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+@media (max-width: 880px) {
+  .expertise-grid {
+    gap: 12px;
+  }
+
+  .expertise-item {
+    border-radius: 18px;
+  }
+
+  .course-card {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .expertise-grid {
+    gap: 10px;
+  }
+
+  .expertise-item {
+    border-radius: 16px;
+  }
+
+  .course-card {
+    border-radius: 18px;
+  }
+
+  .paper-tag {
+    padding-inline: 14px;
+  }
+}
+
+/* Quote frame v2 — livelier wavy edges (top + bottom) */
+.quote-wrap {
+  padding-top: calc(var(--wave-h) * 1.1 + 60px);
+}
+.quote-wrap::before,
+.quote-wrap::after {
+  height: calc(var(--wave-h) * 1.5);
+}
+.quote-wrap::before {
+  animation: driftLeft 12s linear infinite;
+}
+.quote-wrap::after {
+  animation: driftRight 16s linear infinite;
+}
+.contact::before {
+  animation: driftRight 15s linear infinite;
+}
+.contact::after {
+  animation: driftLeft 11s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-wrap::before,
+  .quote-wrap::after,
+  .contact::before,
+  .contact::after {
+    animation: none;
+  }
+}

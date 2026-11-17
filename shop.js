@@ -443,13 +443,36 @@
       return { ok: true };
     },
     remove: function (id) {
+      var before = cart.ids();
+      var index = before.indexOf(id);
       write(
         KEYS.cart,
-        cart.ids().filter(function (x) {
+        before.filter(function (x) {
           return x !== id;
         }),
       );
       emit();
+      /* offer a 7-second "undo" (برگردوندن) */
+      var c = course(id);
+      if (index !== -1 && c && ui.toast) {
+        ui.toast("«" + c.title + "» از سبد حذف شد", "undo", {
+          label: "برگردوندن",
+          onClick: function () {
+            cart.restore(id, index);
+          },
+        });
+      }
+    },
+    /* put a removed course back at its old position */
+    restore: function (id, index) {
+      if (!course(id)) return false;
+      if (orders.ownedIds().indexOf(id) !== -1) return false;
+      var ids = cart.ids();
+      if (ids.indexOf(id) !== -1) return false;
+      ids.splice(Math.min(Math.max(index, 0), ids.length), 0, id);
+      write(KEYS.cart, ids);
+      emit();
+      return true;
     },
     clear: function () {
       write(KEYS.cart, []);
@@ -513,15 +536,31 @@
     }, 600);
   }
 
-  ui.toast = function (message, kind) {
+  /* ui.toast(message, kind, action) - action = { label, onClick } adds a button
+     (used for "undo" after removing a course from the cart) */
+  ui.toast = function (message, kind, action) {
     var stack = refs.toastStack;
     if (!stack) return;
-    var t = el("div", "shop-toast" + (kind ? " " + kind : ""));
+    var t = el(
+      "div",
+      "shop-toast" + (kind ? " " + kind : "") + (action ? " has-action" : ""),
+    );
     t.setAttribute("role", "status");
     var ti = el("span", "shop-toast-icon");
-    ti.appendChild(icon("check"));
+    ti.appendChild(icon(kind === "undo" ? "trash" : "check"));
     t.appendChild(ti);
     t.appendChild(el("span", "shop-toast-text", message));
+    if (action) {
+      var ab = el("button", "shop-toast-action", action.label);
+      ab.type = "button";
+      ab.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (action.onClick) action.onClick();
+        dismissToast(t);
+      });
+      t.appendChild(ab);
+      t.style.setProperty("--toast-ms", TOAST_MS + "ms");
+    }
     stack.appendChild(t);
     void t.offsetWidth;
     t.classList.add("show");

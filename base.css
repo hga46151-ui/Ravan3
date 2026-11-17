@@ -1554,7 +1554,7 @@ header nav.links a.active {
   }
 
   /* messages float above the buttons */
-  .shop-toast-stack {
+  body .shop-toast-stack {
     bottom: calc(var(--bar-total) + 78px);
   }
 }
@@ -1764,4 +1764,274 @@ header nav.links a.active {
   header .nav-actions .burger {
     font-size: 10px;
   }
+}
+
+/* =====================================================================
+   Softer corners — form fields
+   ===================================================================== */
+.field input,
+.field textarea {
+  border-radius: 14px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  box-shadow: 0 0 0 4px rgba(69, 107, 92, 0.12);
+}
+
+/* =====================================================================
+   Decoration layer — organic shapes around the page (see base.js)
+   ===================================================================== */
+.has-deco {
+  position: relative;
+}
+
+.has-deco > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.deco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.deco i {
+  position: absolute;
+  display: block;
+  will-change: transform;
+}
+
+/* big soft blob peeking in from the side */
+.deco .d-blob {
+  width: clamp(220px, 28vw, 400px);
+  aspect-ratio: 1;
+  top: 6%;
+  right: -8%;
+  border-radius: 58% 42% 55% 45% / 46% 56% 44% 54%;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 157, 182, 0.17),
+    rgba(125, 162, 138, 0.12)
+  );
+  animation: decoFloat 16s ease-in-out infinite alternate;
+}
+
+/* thin golden ring */
+.deco .d-ring {
+  width: clamp(70px, 8vw, 120px);
+  aspect-ratio: 1;
+  top: 56%;
+  left: 4%;
+  border-radius: 50%;
+  border: 2px solid rgba(217, 178, 111, 0.5);
+  animation: decoFloat 11s ease-in-out -3s infinite alternate;
+}
+
+/* dotted grid, fading out */
+.deco .d-dots {
+  width: 150px;
+  height: 110px;
+  bottom: 9%;
+  right: 5%;
+  background-image: radial-gradient(
+    circle,
+    rgba(69, 107, 92, 0.32) 2px,
+    transparent 2.5px
+  );
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    #000 35%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%);
+  animation: decoFloat 13s ease-in-out -6s infinite alternate;
+}
+
+/* little leaf */
+.deco .d-leaf {
+  width: 64px;
+  height: 64px;
+  top: 14%;
+  left: 7%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M12 88C10 42 42 12 90 10C90 58 58 90 12 88Z' fill='%23456b5c' fill-opacity='0.2'/%3E%3Cpath d='M16 84C38 60 58 38 84 16' stroke='%23456b5c' stroke-opacity='0.35' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  animation: decoSway 9s ease-in-out infinite alternate;
+}
+
+/* every other section mirrors the layout */
+.deco.is-b .d-blob {
+  right: auto;
+  left: -8%;
+  top: auto;
+  bottom: 4%;
+  border-radius: 45% 55% 42% 58% / 54% 44% 56% 46%;
+  background: linear-gradient(
+    135deg,
+    rgba(217, 178, 111, 0.2),
+    rgba(59, 157, 182, 0.1)
+  );
+}
+
+.deco.is-b .d-ring {
+  left: auto;
+  right: 3%;
+  top: auto;
+  bottom: 20%;
+  border-color: rgba(59, 157, 182, 0.45);
+}
+
+.deco.is-b .d-dots {
+  right: auto;
+  left: 6%;
+  bottom: auto;
+  top: 10%;
+}
+
+.deco.is-b .d-leaf {
+  left: auto;
+  right: 8%;
+  top: auto;
+  bottom: 12%;
+  transform: scaleX(-1);
+}
+
+/* dark quote section: lighter, warmer shapes */
+.quote-wrap .deco .d-blob {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(217, 178, 111, 0.1)
+  );
+}
+
+.quote-wrap .deco .d-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 2px,
+    transparent 2.5px
+  );
+}
+
+@keyframes decoFloat {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(0, -22px, 0) rotate(8deg);
+  }
+}
+
+@keyframes decoSway {
+  from {
+    transform: rotate(-12deg) translateY(0);
+  }
+  to {
+    transform: rotate(14deg) translateY(-10px);
+  }
+}
+
+@media (max-width: 880px) {
+  .deco .d-blob {
+    width: 190px;
+    right: -22%;
+    top: 3%;
+  }
+
+  .deco.is-b .d-blob {
+    left: -22%;
+    bottom: 2%;
+  }
+
+  .deco .d-dots {
+    display: none;
+  }
+
+  .deco .d-ring {
+    width: 54px;
+    left: 2%;
+  }
+
+  .deco.is-b .d-ring {
+    right: 3%;
+  }
+
+  .deco .d-leaf {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deco i {
+    animation: none;
+  }
+}
+
+/* Panels v1 — floating rounded footer */
+body footer {
+  margin: 0 clamp(10px, 2.2vw, 32px) clamp(10px, 2vw, 24px);
+  padding-top: clamp(36px, 5vw, 64px);
+  border-radius: clamp(32px, 6vw, 90px) clamp(32px, 6vw, 90px)
+    clamp(20px, 3vw, 40px) clamp(20px, 3vw, 40px);
+  border: 1px solid var(--line) !important;
+  overflow: hidden;
+}
+
+/* Page shell v1 — tinted backdrop with organic fixed blobs (page is no longer one flat rectangle) */
+body {
+  background:
+    radial-gradient(
+      1100px 700px at 100% 0%,
+      rgba(59, 157, 182, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 0% 55%,
+      rgba(217, 178, 111, 0.16),
+      transparent 62%
+    ),
+    radial-gradient(
+      1000px 800px at 100% 100%,
+      rgba(122, 158, 142, 0.22),
+      transparent 60%
+    ),
+    #eef3ef;
+  background-attachment: fixed;
+}
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+}
+body::before {
+  width: 38vw;
+  height: 38vw;
+  max-width: 560px;
+  max-height: 560px;
+  top: 30vh;
+  inset-inline-start: -14vw;
+  border-radius: 62% 38% 55% 45% / 48% 58% 42% 52%;
+  background: rgba(122, 158, 142, 0.18);
+}
+body::after {
+  width: 30vw;
+  height: 30vw;
+  max-width: 440px;
+  max-height: 440px;
+  bottom: -10vw;
+  inset-inline-end: -8vw;
+  border-radius: 45% 55% 38% 62% / 58% 42% 58% 42%;
+  background: rgba(59, 157, 182, 0.16);
 }
