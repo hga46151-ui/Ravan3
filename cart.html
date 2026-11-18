@@ -18,6 +18,14 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
     /></noscript>
+    <script>
+      /* remembered navbar position (desktop); applied before first paint */
+      try {
+        var d = localStorage.getItem("navDock");
+        if (/^(bottom|left|right)$/.test(d))
+          document.documentElement.dataset.dock = d;
+      } catch (e) {}
+    </script>
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="shop.css" />
     <link rel="stylesheet" href="cart.css" />

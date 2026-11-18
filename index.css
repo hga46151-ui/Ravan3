@@ -1882,3 +1882,26 @@
     animation: none;
   }
 }
+
+/* =====================================================================
+   Soft seams
+   The paper-coloured wave that opens .about and #courses starts with a flat
+   top edge. The section above now fades into the same paper colour at its
+   bottom, so that edge no longer shows as a straight pale band.
+   ===================================================================== */
+.banner-section,
+#expertise {
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 250, 247, 0) calc(100% - 130px),
+    var(--paper) 100%
+  );
+}
+
+/* The soft aurora blobs of the hero used to be cut off by a hard horizontal
+   edge at the top of the hero (visible beside the navbar). Only the sides
+   are clipped now. */
+.hero-section {
+  overflow: visible;
+  overflow-x: clip;
+}
