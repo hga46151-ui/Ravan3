@@ -8,24 +8,11 @@
       content="سعید خرمی، روانشناس و مشاور (متخصص واقعیت‌درمانی)، مدرس آموزش خانواده و مدرس دانشگاه. مشاوره نوجوان و خانواده در قم و تهران، به‌صورت حضوری، آنلاین و تلفنی."
     />
     <title>سعید خرمی | روانشناس و مشاور (متخصص واقعیت‌درمانی)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Lalezar&amp;display=swap"
-    /></noscript>
     <script>
       /* remembered navbar position (desktop); applied before first paint */
       try {
         var d = localStorage.getItem("navDock");
-        if (/^(bottom|left|right)$/.test(d))
+        if (window.matchMedia("(min-width: 1101px)").matches && /^(bottom|left|right)$/.test(d))
           document.documentElement.dataset.dock = d;
       } catch (e) {}
     </script>
@@ -34,6 +21,7 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">پرش به محتوای اصلی</a>
     <header>
       <div class="wrap nav">
         <a href="index.html" class="brand" aria-label="سعید خرمی، صفحه‌ی اصلی">
@@ -138,6 +126,7 @@
         </div>
       </div>
     </header>
+    <main id="main-content">
 
     <section class="hero-section">
       <div class="wrap hero">
@@ -672,21 +661,23 @@
         <form id="contactForm">
           <div class="field">
             <label for="name">نام و نام خانوادگی</label>
-            <input id="name" type="text" required />
+            <input id="name" name="name" type="text" autocomplete="name" required />
           </div>
           <div class="field">
             <label for="phone">شماره تماس</label>
-            <input id="phone" type="tel" required />
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
           </div>
           <div class="field">
             <label for="msg">پیام شما</label>
             <textarea
               id="msg"
+              name="message"
               rows="4"
               placeholder="مثلاً: می‌خواهم برای دوره‌ی مدیریت اضطراب ثبت‌نام کنم"
             ></textarea>
           </div>
           <button type="submit" class="btn btn-primary">ارسال پیام</button>
+          <p class="contact-error" role="alert" aria-live="assertive" hidden></p>
           <p
             class="done"
             style="display: none; color: var(--sage); font-size: 14px"
@@ -697,6 +688,7 @@
       </div>
     </section>
 
+    </main>
     <footer>
       <div class="wrap">
         <span>© ۱۴۰۵ سعید خرمی، روانشناس — پروانه نظام روانشناسی ۱۳۰۲۶۲۴</span>

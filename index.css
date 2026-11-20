@@ -1905,3 +1905,16 @@
   overflow: visible;
   overflow-x: clip;
 }
+
+
+/* Contrast and touch-target corrections */
+.hero h1 { background: none; color: #263b32; -webkit-text-fill-color: #263b32; animation: none; }
+.hero-lede, .paper-tag { color: #394640; }
+.contact-error { color: #8b2525; background: #fff; border: 1px solid #8b2525; border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+#contactForm button:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-art { grid-row: 1; }
+  .psychology-character { width: min(82vw, 440px); max-height: 360px; object-fit: contain; }
+  .hero-copy { grid-row: 2; }
+}

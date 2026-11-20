@@ -3,9 +3,37 @@
 (function () {
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
+    contactForm.addEventListener("submit", async function (e) {
       e.preventDefault();
-      contactForm.querySelector(".done").style.display = "block";
+      const error = contactForm.querySelector(".contact-error");
+      const done = contactForm.querySelector(".done");
+      error.hidden = true;
+      done.style.display = "none";
+      if (!contactForm.reportValidity()) return;
+      const endpoint = contactForm.dataset.endpoint;
+      if (!endpoint) {
+        error.textContent = "ارسال آنلاین هنوز برای این سایت پیکربندی نشده است. لطفاً از شماره تماس درج‌شده در صفحه استفاده کنید.";
+        error.hidden = false;
+        return;
+      }
+      const submit = contactForm.querySelector('[type="submit"]');
+      submit.disabled = true;
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: { Accept: "application/json" },
+        });
+        if (!response.ok) throw new Error("ارسال ناموفق بود");
+        done.textContent = "پیام شما با موفقیت ارسال شد.";
+        done.style.display = "block";
+        contactForm.reset();
+      } catch (err) {
+        error.textContent = "ارسال پیام انجام نشد. اتصال اینترنت را بررسی کنید یا از شماره تماس استفاده کنید.";
+        error.hidden = false;
+      } finally {
+        submit.disabled = false;
+      }
     });
   }
 })();
@@ -36,7 +64,7 @@
     b.type = "button";
     b.className = "banner-dot";
     b.setAttribute("role", "tab");
-    b.setAttribute("aria-label", "بنر " + (i + 1));
+    b.setAttribute("aria-label", "اسلاید " + (i + 1) + " از " + n);
     b.addEventListener("click", function () {
       goTo(i);
       restart();

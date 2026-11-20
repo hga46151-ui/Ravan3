@@ -1095,3 +1095,14 @@ body.status-open {
     stroke-dashoffset: 0;
   }
 }
+
+
+/* Mobile accessibility target sizes */
+@media (max-width: 880px) {
+  .auth-tab { min-height: 44px; padding: 10px 22px; }
+  .check-row input[type="checkbox"] { width: 22px; height: 22px; min-width: 22px; }
+  .auth-form .check-row { min-height: 44px; align-items: center; }
+}
+@media (max-width: 880px) {
+  .auth-form .toggle-pass { width: 44px; height: 44px; }
+}

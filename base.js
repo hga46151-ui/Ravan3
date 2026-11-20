@@ -75,14 +75,6 @@
       }
     });
 
-    window.addEventListener("load", function () {
-      if (mq.matches) {
-        setTimeout(function () {
-          openMenu();
-          setTimeout(closeMenu, 3000);
-        }, 500);
-      }
-    });
   }
 
   const fab = document.getElementById("fabAuth");
@@ -114,13 +106,27 @@
       { passive: true },
     );
 
-    /* Independent of hover/click: automatically opens every 10 seconds
-       and stays open for 2 seconds before closing again. */
-    setInterval(function () {
-      openFab();
-      clearTimeout(fabCloseTimer);
-      fabCloseTimer = setTimeout(closeFab, 2000);
-    }, 10000);
+    /* Keep the original periodic hint whenever the visitor is signed out.
+       A signed-in user sees no automatic prompt; after logout the prompt resumes. */
+    window.addEventListener("load", function () {
+      function isSignedIn() {
+        var auth = window.Shop && window.Shop.auth;
+        return !!(auth && typeof auth.user === "function" && auth.user());
+      }
+
+      setInterval(function () {
+        /* Re-check on every cycle so login/logout changes take effect. */
+        if (isSignedIn()) {
+          closeFab();
+          clearTimeout(fabCloseTimer);
+          return;
+        }
+        openFab();
+        clearTimeout(fabCloseTimer);
+        fabCloseTimer = setTimeout(closeFab, 2000);
+      }, 10000);
+    });
+
   }
 
   const backToTop = document.getElementById("backToTop");
@@ -364,7 +370,7 @@
    Arrow keys on the focused grip do the same for keyboard users.
    The choice is stored in localStorage and applied by a one-line script in
    each page's <head> so there is no flash on load. Phones and tablets keep
-   their bottom tab bar: the grip is hidden below 881px and so is every dock rule. */
+   their bottom tab bar: the grip is hidden below 1101px and so is every dock rule. */
 (function () {
   const nav = document.querySelector("header .nav");
   if (!nav) return;
@@ -373,7 +379,7 @@
   const KEY = "navDock";
   const DOCKS = ["top", "bottom", "left", "right"];
   const NAMES = { top: "بالا", bottom: "پایین", left: "چپ", right: "راست" };
-  const desktop = window.matchMedia("(min-width: 881px)");
+  const desktop = window.matchMedia("(min-width: 1101px)");
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const current = function () {
@@ -498,20 +504,18 @@
 })();
 
 /* ---------- One-time hint for the draggable navbar (desktop) ----------
-   A small bubble with the tutorial GIF appears next to the grip a moment after
+   A small bubble with the tutorial text hint appears next to the grip a moment after
    the first visit. It goes away when the visitor clicks "فهمیدم", presses Escape,
    scrolls, grabs the grip, or after 15 seconds, and is never shown again
    (localStorage key "navHintSeen"). It is also skipped when the bar was already
-   moved, on phones/tablets, and the GIF itself is skipped when the visitor
-   prefers reduced motion. The image is only requested when the bubble opens. */
+   moved, on phones/tablets, and no large tutorial image is downloaded. */
 (function () {
   const grip = document.getElementById("navGrip");
   if (!grip) return;
 
   const KEY = "navHintSeen";
   const root = document.documentElement;
-  const desktop = window.matchMedia("(min-width: 881px)");
-  const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktop = window.matchMedia("(min-width: 1101px)");
 
   try {
     if (localStorage.getItem(KEY)) return;
@@ -580,17 +584,6 @@
     hint = document.createElement("div");
     hint.className = "nav-hint";
     hint.setAttribute("role", "note");
-
-    if (!calm.matches) {
-      const img = document.createElement("img");
-      img.src = "images/navbar-drag.gif";
-      img.width = 480;
-      img.height = 270;
-      img.decoding = "async";
-      img.alt =
-        "آموزش کوتاه: نوبار را از نقطه‌های کنارش می‌گیریم و به سمت چپ صفحه می‌کشیم.";
-      hint.appendChild(img);
-    }
 
     const text = document.createElement("p");
     text.textContent =

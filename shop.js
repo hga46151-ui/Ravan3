@@ -220,6 +220,11 @@
       : null;
   }
   var auth = {
+    /* True once at least one account has been created in this browser. */
+    hasRegistered: function () {
+      var users = read(KEYS.users, []);
+      return Array.isArray(users) && users.length > 0;
+    },
     user: function () {
       var id = read(KEYS.session, null);
       if (!id) return null;

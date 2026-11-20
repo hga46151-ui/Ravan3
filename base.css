@@ -2048,7 +2048,7 @@ body::after {
   display: none;
 }
 
-@media (min-width: 881px) {
+@media (min-width: 1101px) {
   :root {
     --dock-w: 92px; /* width of the bar when it sits on the left / right */
     --dock-gap: 12px; /* distance between the bar and the screen edge */
@@ -2393,7 +2393,7 @@ body footer :focus-visible {
    One-time hint bubble for the draggable navbar (desktop only)
    Created by base.js next to the grip, with the tutorial GIF inside.
    ===================================================================== */
-@media (min-width: 881px) {
+@media (min-width: 1101px) {
   .nav-hint {
     position: fixed;
     z-index: 80;
@@ -2494,4 +2494,42 @@ body footer :focus-visible {
       animation: none;
     }
   }
+}
+
+
+/* Accessibility and responsive refinements */
+@font-face {
+  font-family: "Vazirmatn Local";
+  src: url("./fonts/Vazirmatn-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+body, button, input, textarea, select { font-family: "Vazirmatn Local", Vazirmatn, Tahoma, sans-serif; }
+.skip-link {
+  position: fixed; inset-inline-start: 12px; top: 12px; z-index: 10000;
+  padding: 12px 18px; border-radius: 10px; background: #fff; color: #243b32;
+  border: 2px solid #243b32; transform: translateY(-160%);
+}
+.skip-link:focus { transform: translateY(0); }
+:focus-visible { outline: 3px solid #145f4a; outline-offset: 3px; }
+@media (max-width: 1100px) {
+  html[data-dock="left"] header, html[data-dock="right"] header { position: relative !important; }
+  html[data-dock="left"] header .nav, html[data-dock="right"] header .nav { width: calc(100% - 24px) !important; height: 66px !important; }
+}
+@media (max-width: 880px) {
+  .banner-dot { width: 44px; height: 44px; padding: 17px; background: transparent; }
+  .banner-dot::before { content: ""; position: absolute; inset: 17px; border-radius: 50%; background: rgba(255,255,255,.82); }
+  .banner-dot.is-active { width: 52px; }
+  header .nav-actions .tab-link, header .nav-actions .tool-btn, header .nav-actions .burger { min-height: 48px; }
+  .shop-toast { background: #243b32; border: 1px solid rgba(255,255,255,.3); box-shadow: 0 12px 34px rgba(0,0,0,.48); }
+}
+
+/* Final contrast and touch sizing pass */
+:root { --ink-soft: #56635d; --sage: #527565; }
+@media (max-width: 880px) {
+  header .nav-actions .tab-link,
+  header .nav-actions .tool-btn,
+  header .nav-actions .burger { font-size: 12px; }
+  body footer nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 10px; }
 }
