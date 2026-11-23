@@ -1947,3 +1947,13 @@
     grid-row: 2;
   }
 }
+
+/* expertise cards: always show the full description (no "…" truncation) */
+.expertise-item p {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  -webkit-box-orient: unset;
+  text-overflow: clip;
+}
