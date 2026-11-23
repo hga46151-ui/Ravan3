@@ -4,7 +4,7 @@
 
 /* ---------- Auth (sign up / log in) ---------- */
 .auth-section {
-  padding: 72px 0 96px;
+  padding: 64px 0 96px;
 }
 .auth-grid {
   display: grid;
@@ -90,18 +90,18 @@
   position: relative;
 }
 .auth-benefits {
-  margin: 30px 0 0;
+  margin: 32px 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   position: relative;
 }
 .auth-benefits li {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-size: 14.5px;
 }
 .auth-benefits svg {
@@ -117,10 +117,10 @@
 .auth-tabs {
   display: inline-flex;
   border: 1px solid var(--line);
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 .auth-tab {
-  padding: 10px 26px;
+  padding: 12px 32px;
   font-size: 14.5px;
   color: var(--ink-soft);
   background: var(--paper);
@@ -142,7 +142,7 @@
   font-size: clamp(24px, 3vw, 30px);
 }
 .auth-switch {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 14.5px;
   color: var(--ink-soft);
 }
@@ -157,7 +157,7 @@
   border-bottom: 1px solid currentColor;
 }
 .auth-form {
-  margin-top: 28px;
+  margin-top: 32px;
 }
 .hidden {
   display: none;
@@ -166,9 +166,10 @@
   position: relative;
 }
 .field-password input {
-  padding-left: 46px;
+  padding-left: 48px;
 }
 .toggle-pass {
+  padding: 0;
   position: absolute;
   left: 4px;
   top: 50%;
@@ -199,7 +200,7 @@
 .check-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   font-size: 13.5px;
   color: var(--ink-soft);
   line-height: 1.7;
@@ -263,14 +264,14 @@
     grid-template-columns: 1fr;
   }
   .auth-panel {
-    padding: 36px 28px;
+    padding: 40px 32px;
     order: -1;
   }
   .auth-panel-lede {
     max-width: none;
   }
   .auth-form-side {
-    padding: 36px 28px;
+    padding: 40px 32px;
   }
 }
 
@@ -331,7 +332,7 @@
 .back-home.open .back-home-label {
   max-width: 160px;
   opacity: 1;
-  padding-right: 18px;
+  padding-right: 20px;
 }
 @media (max-width: 560px) {
   .back-home {
@@ -783,31 +784,31 @@
    ===================================================================== */
 @media (max-width: 880px) {
   .auth-section {
-    padding: 28px 0 56px;
+    padding: 32px 0 56px;
   }
 
   /* the form comes first; the promo block moves under it */
   .auth-panel {
     order: 2;
-    padding: 26px 24px;
+    padding: 32px 24px;
   }
 
   .auth-form-side {
-    padding: 26px 24px;
+    padding: 32px 24px;
   }
 
   .auth-tabs {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 }
 
 @media (max-width: 560px) {
   .auth-section {
-    padding: 18px 0 40px;
+    padding: 20px 0 40px;
   }
 
   .auth-panel {
-    padding: 22px 18px;
+    padding: 24px 20px;
   }
 
   .auth-benefits {
@@ -815,7 +816,7 @@
   }
 
   .auth-form-side {
-    padding: 22px 18px;
+    padding: 24px 20px;
   }
 
   .auth-tabs {
@@ -840,8 +841,8 @@
   .auth-form {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 12px 10px;
-    margin-top: 14px;
+    gap: 12px 12px;
+    margin-top: 16px;
   }
 
   .auth-form > * {
@@ -858,16 +859,16 @@
 
   .auth-form .field label {
     font-size: 12.5px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .auth-form .field input {
-    padding: 10px 12px;
+    padding: 12px 12px;
     font-size: 14.5px;
   }
 
   .auth-form .field-password input {
-    padding-left: 38px;
+    padding-left: 40px;
   }
 
   .auth-form .toggle-pass {
@@ -894,7 +895,7 @@
   }
 
   .auth-panel {
-    padding: 16px 18px;
+    padding: 16px 20px;
   }
 
   .auth-panel h2 {
@@ -936,7 +937,7 @@ body.status-open {
 
 .status-card {
   width: min(100%, 380px);
-  padding: 30px 26px 24px;
+  padding: 32px 32px 24px;
   text-align: center;
   background: var(--card);
   border: 1px solid rgba(69, 107, 92, 0.16);
@@ -954,7 +955,7 @@ body.status-open {
   position: relative;
   width: 76px;
   height: 76px;
-  margin: 0 auto 14px;
+  margin: 0 auto 16px;
 }
 
 .status-spinner {
@@ -1039,7 +1040,7 @@ body.status-open {
 .status-card.is-success .status-bar {
   display: block;
   height: 4px;
-  margin: 18px 0 14px;
+  margin: 20px 0 16px;
   border-radius: 4px;
   background: rgba(69, 107, 92, 0.12);
   overflow: hidden;
@@ -1096,13 +1097,25 @@ body.status-open {
   }
 }
 
-
 /* Mobile accessibility target sizes */
 @media (max-width: 880px) {
-  .auth-tab { min-height: 44px; padding: 10px 22px; }
-  .check-row input[type="checkbox"] { width: 22px; height: 22px; min-width: 22px; }
-  .auth-form .check-row { min-height: 44px; align-items: center; }
+  .auth-tab {
+    min-height: 44px;
+    padding: 12px 24px;
+  }
+  .check-row input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+  .auth-form .check-row {
+    min-height: 44px;
+    align-items: center;
+  }
 }
 @media (max-width: 880px) {
-  .auth-form .toggle-pass { width: 44px; height: 44px; }
+  .auth-form .toggle-pass {
+    width: 44px;
+    height: 44px;
+  }
 }

@@ -12,7 +12,8 @@
       if (!contactForm.reportValidity()) return;
       const endpoint = contactForm.dataset.endpoint;
       if (!endpoint) {
-        error.textContent = "ارسال آنلاین هنوز برای این سایت پیکربندی نشده است. لطفاً از شماره تماس درج‌شده در صفحه استفاده کنید.";
+        error.textContent =
+          "ارسال آنلاین هنوز برای این سایت پیکربندی نشده است. لطفاً از شماره تماس درج‌شده در صفحه استفاده کنید.";
         error.hidden = false;
         return;
       }
@@ -29,7 +30,8 @@
         done.style.display = "block";
         contactForm.reset();
       } catch (err) {
-        error.textContent = "ارسال پیام انجام نشد. اتصال اینترنت را بررسی کنید یا از شماره تماس استفاده کنید.";
+        error.textContent =
+          "ارسال پیام انجام نشد. اتصال اینترنت را بررسی کنید یا از شماره تماس استفاده کنید.";
         error.hidden = false;
       } finally {
         submit.disabled = false;

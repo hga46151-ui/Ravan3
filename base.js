@@ -74,7 +74,6 @@
         closeMenu();
       }
     });
-
   }
 
   const fab = document.getElementById("fabAuth");
@@ -126,7 +125,6 @@
         fabCloseTimer = setTimeout(closeFab, 2000);
       }, 10000);
     });
-
   }
 
   const backToTop = document.getElementById("backToTop");

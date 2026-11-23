@@ -49,7 +49,7 @@
 .panel-grid {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: 28px;
+  gap: 32px;
   align-items: start;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .panel-side {
-  padding: 24px 18px;
+  padding: 24px 20px;
   position: sticky;
   top: 96px;
   animation: rise 0.7s var(--soft) both;
@@ -75,7 +75,7 @@
   gap: 4px;
   text-align: center;
   padding-bottom: 20px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -116,8 +116,8 @@
 .panel-nav button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
+  gap: 12px;
+  padding: 12px 16px;
   border: 0;
   border-radius: 12px;
   background: transparent;
@@ -146,7 +146,7 @@
 }
 
 .panel-nav .logout {
-  margin-top: 10px;
+  margin-top: 12px;
   border-top: 1px solid var(--line);
   border-radius: 0 0 12px 12px;
   padding-top: 16px;
@@ -173,7 +173,7 @@
 
 .panel-title {
   font-size: clamp(24px, 3vw, 32px);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .panel-sub {
@@ -188,7 +188,7 @@
 
 .panel-card h3 {
   font-size: 20px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .stats {
@@ -232,7 +232,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
+  padding: 16px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -251,7 +251,7 @@
 }
 
 .suggest .btn {
-  padding: 9px 18px;
+  padding: 8px 20px;
   font-size: 13.5px;
   white-space: nowrap;
 }
@@ -259,7 +259,7 @@
 .my-course {
   display: grid;
   grid-template-columns: 8px 1fr;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   border: 1px solid rgba(69, 107, 92, 0.14);
   border-radius: 18px;
   overflow: hidden;
@@ -283,7 +283,7 @@
 
 .my-course h3 {
   font-size: 20px;
-  margin: 6px 0 8px;
+  margin: 8px 0 8px;
 }
 
 .my-course p {
@@ -306,7 +306,7 @@
 
 .order {
   padding: 20px 24px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   border: 1px solid rgba(69, 107, 92, 0.14);
   border-radius: 18px;
   background: var(--card);
@@ -336,14 +336,14 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 5px 0;
+  padding: 4px 0;
   font-size: 14.5px;
 }
 
 .order-total {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--line);
   font-weight: 600;
@@ -351,7 +351,7 @@
 
 .empty-state {
   text-align: center;
-  padding: 44px 20px;
+  padding: 48px 20px;
   border: 1.5px dashed rgba(69, 107, 92, 0.25);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.6);
@@ -365,7 +365,7 @@
 .panel-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px 18px;
+  gap: 16px 20px;
 }
 
 .panel-form .full {
@@ -425,9 +425,9 @@
   .panel-profile {
     flex-direction: row;
     justify-content: flex-start;
-    gap: 14px;
+    gap: 16px;
     text-align: right;
-    padding-bottom: 14px;
+    padding-bottom: 16px;
   }
 
   .panel-avatar {
@@ -446,7 +446,7 @@
   .panel-nav button {
     flex: 1 1 auto;
     justify-content: center;
-    padding: 10px 12px;
+    padding: 12px 12px;
     font-size: 14px;
   }
 
@@ -454,7 +454,7 @@
     margin-top: 0;
     border-top: 0;
     border-radius: 12px;
-    padding-top: 10px;
+    padding-top: 12px;
   }
 
   .stats {
@@ -522,22 +522,22 @@
   }
 
   .panel-side {
-    padding: 16px 14px;
+    padding: 16px 16px;
   }
 
   .panel-card {
-    padding: 18px 16px;
-    margin-bottom: 14px;
+    padding: 20px 16px;
+    margin-bottom: 16px;
   }
 
   .stats {
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 12px;
+    margin-bottom: 16px;
   }
 
   .stat {
-    padding: 12px 10px;
+    padding: 12px 12px;
     border-radius: 14px;
   }
 
@@ -557,39 +557,39 @@
   }
 
   .panel-sub {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 
   /* menu: four items in one row, logout below */
   .panel-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    gap: 8px;
   }
 
   .panel-nav a,
   .panel-nav button {
-    padding: 9px 8px;
+    padding: 8px 8px;
     font-size: 13.5px;
   }
 
   .suggest {
     flex-direction: row;
     align-items: center;
-    gap: 10px;
-    padding: 11px 0;
+    gap: 12px;
+    padding: 12px 0;
   }
 
   .suggest .btn {
     flex-shrink: 0;
     white-space: nowrap;
-    padding: 8px 14px;
+    padding: 8px 16px;
     font-size: 13px;
   }
 
   .my-course,
   .order {
-    padding: 14px;
+    padding: 16px;
   }
 }
 
@@ -599,16 +599,16 @@
 @media (max-width: 880px) {
   .panel-form {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 12px 10px;
+    gap: 12px 12px;
   }
 
   .panel-form .field label {
     font-size: 12.5px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .panel-form .field input {
-    padding: 10px 12px;
+    padding: 12px 12px;
     font-size: 14.5px;
   }
 
@@ -628,9 +628,9 @@
   }
 
   .panel-profile {
-    gap: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    gap: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
   }
 
   .panel-avatar {
@@ -693,12 +693,12 @@
   }
 
   .panel-card {
-    padding: 14px 12px;
+    padding: 16px 12px;
   }
 
   .panel-card h3 {
     font-size: 17px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 }
 
@@ -735,7 +735,7 @@ body.confirm-open {
 
 .confirm-card {
   width: min(100%, 400px);
-  padding: 28px 24px 22px;
+  padding: 32px 24px 24px;
   text-align: center;
   background: var(--card);
   border: 1px solid rgba(69, 107, 92, 0.16);
@@ -769,7 +769,7 @@ body.confirm-open {
 .confirm-card h3 {
   font-size: 19px;
   line-height: 1.7;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--ink);
 }
 
@@ -782,14 +782,14 @@ body.confirm-open {
 .confirm-actions {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 22px;
+  gap: 8px;
+  margin-top: 24px;
 }
 
 /* "No": the loud one — big, bold, red frame */
 .confirm-no {
   width: 100%;
-  padding: 14px 18px;
+  padding: 16px 20px;
   font: inherit;
   font-size: 16px;
   font-weight: 700;
@@ -817,7 +817,7 @@ body.confirm-open {
 /* "Yes": quiet at rest, but a soft frame appears around it on hover */
 .confirm-yes {
   width: 100%;
-  padding: 11px 14px;
+  padding: 12px 16px;
   font: inherit;
   font-size: 14px;
   color: var(--ink-soft);

@@ -8,7 +8,10 @@
       /* remembered navbar position (desktop); applied before first paint */
       try {
         var d = localStorage.getItem("navDock");
-        if (window.matchMedia("(min-width: 1101px)").matches && /^(bottom|left|right)$/.test(d))
+        if (
+          window.matchMedia("(min-width: 1101px)").matches &&
+          /^(bottom|left|right)$/.test(d)
+        )
           document.documentElement.dataset.dock = d;
       } catch (e) {}
     </script>
@@ -123,307 +126,307 @@
       </div>
     </header>
     <main id="main-content">
-
-    <section class="auth-section">
-      <div class="wrap">
-        <div class="auth-grid">
-          <div class="auth-panel">
-            <div class="auth-panel-pattern" aria-hidden="true"></div>
-            <span class="auth-kicker">سعید خرمی، روانشناس</span>
-            <h2>ذهنی آرام‌تر، زندگی روشن‌تر</h2>
-            <p class="auth-panel-lede">
-              با ساختن حساب کاربری، به دوره‌های آموزشی و رزرو آنلاین جلسات
-              دسترسی خواهید داشت و می‌توانید پیشرفت خودتان را دنبال کنید.
-            </p>
-            <ul class="auth-benefits">
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M20 6 9 17l-5-5"></path>
-                </svg>
-                دسترسی به دوره‌های ضبط‌شده
-              </li>
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M20 6 9 17l-5-5"></path>
-                </svg>
-                رزرو و مدیریت آنلاین جلسات
-              </li>
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M20 6 9 17l-5-5"></path>
-                </svg>
-                پیگیری پیشرفت شخصی در دوره‌ها
-              </li>
-            </ul>
-          </div>
-
-          <div class="auth-form-side">
-            <div class="auth-tabs" role="tablist">
-              <button
-                type="button"
-                class="auth-tab active"
-                id="tabRegister"
-                role="tab"
-                aria-selected="true"
-                aria-controls="registerForm"
-              >
-                ثبت‌نام
-              </button>
-              <button
-                type="button"
-                class="auth-tab"
-                id="tabLogin"
-                role="tab"
-                aria-selected="false"
-                aria-controls="loginForm"
-              >
-                ورود
-              </button>
+      <section class="auth-section">
+        <div class="wrap">
+          <div class="auth-grid">
+            <div class="auth-panel">
+              <div class="auth-panel-pattern" aria-hidden="true"></div>
+              <span class="auth-kicker">سعید خرمی، روانشناس</span>
+              <h2>ذهنی آرام‌تر، زندگی روشن‌تر</h2>
+              <p class="auth-panel-lede">
+                با ساختن حساب کاربری، به دوره‌های آموزشی و رزرو آنلاین جلسات
+                دسترسی خواهید داشت و می‌توانید پیشرفت خودتان را دنبال کنید.
+              </p>
+              <ul class="auth-benefits">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                  دسترسی به دوره‌های ضبط‌شده
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                  رزرو و مدیریت آنلاین جلسات
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                  پیگیری پیشرفت شخصی در دوره‌ها
+                </li>
+              </ul>
             </div>
 
-            <div id="registerPane">
-              <h1>ایجاد حساب کاربری</h1>
-              <p class="auth-switch">
-                قبلاً ثبت‌نام کرده‌اید؟
-                <button type="button" data-switch-to="login">وارد شوید</button>
-              </p>
-              <form class="auth-form" id="registerForm" novalidate>
-                <div class="field">
-                  <label for="regName">نام و نام خانوادگی</label>
-                  <input id="regName" type="text" required />
-                  <p class="field-error" id="regNameError">
-                    لطفاً نام و نام خانوادگی را وارد کنید.
-                  </p>
-                </div>
-                <div class="field">
-                  <label for="regPhone">شماره موبایل</label>
-                  <input
-                    id="regPhone"
-                    type="tel"
-                    inputmode="numeric"
-                    pattern="09\d{9}"
-                    placeholder="09xxxxxxxxx"
-                    required
-                  />
-                  <p class="field-error" id="regPhoneError">
-                    شماره موبایل را به‌صورت ۰۹xxxxxxxxx وارد کنید.
-                  </p>
-                </div>
-                <div class="field">
-                  <label for="regEmail">ایمیل (اختیاری)</label>
-                  <input id="regEmail" type="email" />
-                  <p class="field-error" id="regEmailError">
-                    ایمیل وارد شده معتبر نیست.
-                  </p>
-                </div>
-                <div class="field field-password">
-                  <label for="regPass">رمز عبور</label>
-                  <div class="input-wrap">
+            <div class="auth-form-side">
+              <div class="auth-tabs" role="tablist">
+                <button
+                  type="button"
+                  class="auth-tab active"
+                  id="tabRegister"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="registerForm"
+                >
+                  ثبت‌نام
+                </button>
+                <button
+                  type="button"
+                  class="auth-tab"
+                  id="tabLogin"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="loginForm"
+                >
+                  ورود
+                </button>
+              </div>
+
+              <div id="registerPane">
+                <h1>ایجاد حساب کاربری</h1>
+                <p class="auth-switch">
+                  قبلاً ثبت‌نام کرده‌اید؟
+                  <button type="button" data-switch-to="login">
+                    وارد شوید
+                  </button>
+                </p>
+                <form class="auth-form" id="registerForm" novalidate>
+                  <div class="field">
+                    <label for="regName">نام و نام خانوادگی</label>
+                    <input id="regName" type="text" required />
+                    <p class="field-error" id="regNameError">
+                      لطفاً نام و نام خانوادگی را وارد کنید.
+                    </p>
+                  </div>
+                  <div class="field">
+                    <label for="regPhone">شماره موبایل</label>
                     <input
-                      id="regPass"
-                      type="password"
-                      minlength="8"
+                      id="regPhone"
+                      type="tel"
+                      inputmode="numeric"
+                      pattern="09\d{9}"
+                      placeholder="09xxxxxxxxx"
                       required
                     />
-                    <button
-                      type="button"
-                      class="toggle-pass"
-                      aria-label="نمایش رمز عبور"
-                    >
-                      <svg
-                        class="icon-on"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
-                        ></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                      <svg
-                        class="icon-off"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
-                        ></path>
-                      </svg>
-                    </button>
+                    <p class="field-error" id="regPhoneError">
+                      شماره موبایل را به‌صورت ۰۹xxxxxxxxx وارد کنید.
+                    </p>
                   </div>
-                  <p class="field-error" id="regPassError">
-                    رمز عبور باید حداقل ۸ کاراکتر باشد.
-                  </p>
-                </div>
-                <div class="field field-password">
-                  <label for="regPassConfirm">تکرار رمز عبور</label>
-                  <div class="input-wrap">
-                    <input id="regPassConfirm" type="password" required />
-                    <button
-                      type="button"
-                      class="toggle-pass"
-                      aria-label="نمایش رمز عبور"
-                    >
-                      <svg
-                        class="icon-on"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
-                        ></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                      <svg
-                        class="icon-off"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
-                        ></path>
-                      </svg>
-                    </button>
+                  <div class="field">
+                    <label for="regEmail">ایمیل (اختیاری)</label>
+                    <input id="regEmail" type="email" />
+                    <p class="field-error" id="regEmailError">
+                      ایمیل وارد شده معتبر نیست.
+                    </p>
                   </div>
-                  <p class="field-error" id="regPassConfirmError">
-                    رمز عبور و تکرار آن یکسان نیستند.
-                  </p>
-                </div>
-                <label class="check-row">
-                  <input type="checkbox" id="regAgree" required />
-                  <span
-                    >با
-                    <a href="#">قوانین و حریم خصوصی</a>
-                    سایت موافقم</span
-                  >
-                </label>
-                <p class="field-error" id="regAgreeError">
-                  برای ادامه باید با قوانین و حریم خصوصی موافقت کنید.
-                </p>
-                <button type="submit" class="btn btn-primary">
-                  ایجاد حساب
-                </button>
-                <p class="form-error" id="registerError" role="alert"></p>
-                <p class="form-success" id="registerSuccess">
-                  حساب شما ساخته شد؛ در حال انتقال به پنل کاربری…
-                </p>
-              </form>
-            </div>
-
-            <div id="loginPane" class="hidden">
-              <h1>ورود به حساب کاربری</h1>
-              <p class="auth-switch">
-                هنوز حساب نساخته‌اید؟
-                <button type="button" data-switch-to="register">
-                  ثبت‌نام کنید
-                </button>
-              </p>
-              <form class="auth-form" id="loginForm" novalidate>
-                <div class="field">
-                  <label for="loginId">شماره موبایل یا ایمیل</label>
-                  <input id="loginId" type="text" required />
-                  <p class="field-error" id="loginIdError">
-                    شماره موبایل یا ایمیل را وارد کنید.
-                  </p>
-                </div>
-                <div class="field field-password">
-                  <label for="loginPass">رمز عبور</label>
-                  <div class="input-wrap">
-                    <input id="loginPass" type="password" required />
-                    <button
-                      type="button"
-                      class="toggle-pass"
-                      aria-label="نمایش رمز عبور"
-                    >
-                      <svg
-                        class="icon-on"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                  <div class="field field-password">
+                    <label for="regPass">رمز عبور</label>
+                    <div class="input-wrap">
+                      <input
+                        id="regPass"
+                        type="password"
+                        minlength="8"
+                        required
+                      />
+                      <button
+                        type="button"
+                        class="toggle-pass"
+                        aria-label="نمایش رمز عبور"
                       >
-                        <path
-                          d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
-                        ></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                      <svg
-                        class="icon-off"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
-                        ></path>
-                      </svg>
-                    </button>
+                        <svg
+                          class="icon-on"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
+                          ></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg
+                          class="icon-off"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <p class="field-error" id="regPassError">
+                      رمز عبور باید حداقل ۸ کاراکتر باشد.
+                    </p>
                   </div>
-                  <p class="field-error" id="loginPassError">
-                    رمز عبور را وارد کنید.
-                  </p>
-                </div>
-                <div class="auth-meta-row">
-                  <label class="check-row" style="font-size: 13.5px">
-                    <input type="checkbox" style="margin-top: 0" />
-                    <span>مرا به‌خاطر بسپار</span>
+                  <div class="field field-password">
+                    <label for="regPassConfirm">تکرار رمز عبور</label>
+                    <div class="input-wrap">
+                      <input id="regPassConfirm" type="password" required />
+                      <button
+                        type="button"
+                        class="toggle-pass"
+                        aria-label="نمایش رمز عبور"
+                      >
+                        <svg
+                          class="icon-on"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
+                          ></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg
+                          class="icon-off"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <p class="field-error" id="regPassConfirmError">
+                      رمز عبور و تکرار آن یکسان نیستند.
+                    </p>
+                  </div>
+                  <label class="check-row">
+                    <input type="checkbox" id="regAgree" required />
+                    <span
+                      >با
+                      <a href="#">قوانین و حریم خصوصی</a>
+                      سایت موافقم</span
+                    >
                   </label>
-                  <a href="#">فراموشی رمز عبور؟</a>
-                </div>
-                <button type="submit" class="btn btn-primary">ورود</button>
-                <p class="form-error" id="loginError" role="alert"></p>
-                <p class="form-success" id="loginSuccess">
-                  خوش آمدید؛ در حال انتقال به حساب شما هستیم.
+                  <p class="field-error" id="regAgreeError">
+                    برای ادامه باید با قوانین و حریم خصوصی موافقت کنید.
+                  </p>
+                  <button type="submit" class="btn btn-primary">
+                    ایجاد حساب
+                  </button>
+                  <p class="form-error" id="registerError" role="alert"></p>
+                  <p class="form-success" id="registerSuccess">
+                    حساب شما ساخته شد؛ در حال انتقال به پنل کاربری…
+                  </p>
+                </form>
+              </div>
+
+              <div id="loginPane" class="hidden">
+                <h1>ورود به حساب کاربری</h1>
+                <p class="auth-switch">
+                  هنوز حساب نساخته‌اید؟
+                  <button type="button" data-switch-to="register">
+                    ثبت‌نام کنید
+                  </button>
                 </p>
-              </form>
+                <form class="auth-form" id="loginForm" novalidate>
+                  <div class="field">
+                    <label for="loginId">شماره موبایل یا ایمیل</label>
+                    <input id="loginId" type="text" required />
+                    <p class="field-error" id="loginIdError">
+                      شماره موبایل یا ایمیل را وارد کنید.
+                    </p>
+                  </div>
+                  <div class="field field-password">
+                    <label for="loginPass">رمز عبور</label>
+                    <div class="input-wrap">
+                      <input id="loginPass" type="password" required />
+                      <button
+                        type="button"
+                        class="toggle-pass"
+                        aria-label="نمایش رمز عبور"
+                      >
+                        <svg
+                          class="icon-on"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"
+                          ></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg
+                          class="icon-off"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.24 4.24M6.3 6.4C3.9 8 2 12 2 12s3.5 7 10 7c1.9 0 3.5-.5 4.9-1.3M9.9 5.1C10.6 5 11.3 5 12 5c6.5 0 10 7 10 7-.4.8-1.1 1.9-2.1 2.9"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <p class="field-error" id="loginPassError">
+                      رمز عبور را وارد کنید.
+                    </p>
+                  </div>
+                  <div class="auth-meta-row">
+                    <label class="check-row" style="font-size: 13.5px">
+                      <input type="checkbox" style="margin-top: 0" />
+                      <span>مرا به‌خاطر بسپار</span>
+                    </label>
+                    <a href="#">فراموشی رمز عبور؟</a>
+                  </div>
+                  <button type="submit" class="btn btn-primary">ورود</button>
+                  <p class="form-error" id="loginError" role="alert"></p>
+                  <p class="form-success" id="loginSuccess">
+                    خوش آمدید؛ در حال انتقال به حساب شما هستیم.
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
+      </section>
     </main>
     <footer>
       <div class="wrap">

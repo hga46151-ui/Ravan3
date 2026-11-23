@@ -9,7 +9,10 @@
       /* remembered navbar position (desktop); applied before first paint */
       try {
         var d = localStorage.getItem("navDock");
-        if (window.matchMedia("(min-width: 1101px)").matches && /^(bottom|left|right)$/.test(d))
+        if (
+          window.matchMedia("(min-width: 1101px)").matches &&
+          /^(bottom|left|right)$/.test(d)
+        )
           document.documentElement.dataset.dock = d;
       } catch (e) {}
     </script>
@@ -124,45 +127,43 @@
       </div>
     </header>
     <main id="main-content">
-
-    <section class="cart-page">
-      <div class="wrap">
-        <div id="cartView">
-          <h1 class="cart-title">سبد خرید</h1>
-          <p class="cart-sub" id="cartSub"></p>
-          <div class="cart-layout" id="cartLayout">
-            <div class="cart-list" id="cartList"></div>
-            <aside class="cart-box" id="cartBox">
-              <h2>خلاصه‌ی سفارش</h2>
-              <div class="sum-line">
-                <span>تعداد دوره‌ها</span><span id="sumCount">۰</span>
-              </div>
-              <div class="sum-line sum-total">
-                <span>مبلغ قابل پرداخت</span><b id="sumTotal">۰</b>
-              </div>
-              <div class="login-hint" id="loginHint" hidden>
-                برای تکمیل خرید باید وارد حساب شوید.
-                <a href="register.html?next=cart.html#login">ورود</a> یا
-                <a href="register.html?next=cart.html">ثبت‌نام</a>
-              </div>
-              <button type="button" class="btn btn-primary" id="payBtn">
-                پرداخت و ثبت‌نام در دوره‌ها
-              </button>
-              <p class="demo-note" id="demoNote" hidden>
-                درگاه پرداخت هنوز متصل نشده است؛ این مرحله فقط آزمایشی است و
-                مبلغی دریافت نمی‌شود.
-              </p>
-              <p class="cart-note">
-                پس از پرداخت، دوره در بخش «دوره‌های من» فعال می‌شود و جزئیات
-                دسترسی برای شما ارسال خواهد شد.
-              </p>
-            </aside>
+      <section class="cart-page">
+        <div class="wrap">
+          <div id="cartView">
+            <h1 class="cart-title">سبد خرید</h1>
+            <p class="cart-sub" id="cartSub"></p>
+            <div class="cart-layout" id="cartLayout">
+              <div class="cart-list" id="cartList"></div>
+              <aside class="cart-box" id="cartBox">
+                <h2>خلاصه‌ی سفارش</h2>
+                <div class="sum-line">
+                  <span>تعداد دوره‌ها</span><span id="sumCount">۰</span>
+                </div>
+                <div class="sum-line sum-total">
+                  <span>مبلغ قابل پرداخت</span><b id="sumTotal">۰</b>
+                </div>
+                <div class="login-hint" id="loginHint" hidden>
+                  برای تکمیل خرید باید وارد حساب شوید.
+                  <a href="register.html?next=cart.html#login">ورود</a> یا
+                  <a href="register.html?next=cart.html">ثبت‌نام</a>
+                </div>
+                <button type="button" class="btn btn-primary" id="payBtn">
+                  پرداخت و ثبت‌نام در دوره‌ها
+                </button>
+                <p class="demo-note" id="demoNote" hidden>
+                  درگاه پرداخت هنوز متصل نشده است؛ این مرحله فقط آزمایشی است و
+                  مبلغی دریافت نمی‌شود.
+                </p>
+                <p class="cart-note">
+                  پس از پرداخت، دوره در بخش «دوره‌های من» فعال می‌شود و جزئیات
+                  دسترسی برای شما ارسال خواهد شد.
+                </p>
+              </aside>
+            </div>
           </div>
+          <div id="doneView" hidden></div>
         </div>
-        <div id="doneView" hidden></div>
-      </div>
-    </section>
-
+      </section>
     </main>
     <footer>
       <div class="wrap">
